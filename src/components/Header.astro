@@ -1,0 +1,77 @@
+---
+/* Шапка. На главной пункты меню — якоря на странице, на остальных — ссылки на
+   index.html#… Отзывчивость на CSS-медиазапросах (в оригинале был JS по innerWidth). */
+import Icon from './Icon.astro';
+
+interface Props {
+  home?: boolean;       // главная: якоря локальные
+  ctaHref?: string;     // куда ведёт главная кнопка
+}
+const { home = false, ctaHref } = Astro.props;
+const p = home ? '' : 'index.html';
+const nav = [
+  ['audience', 'Для кого'],
+  ['about', 'Обо мне'],
+  ['offer', 'Обучение'],
+  ['cases', 'Кейсы'],
+  ['faq', 'Вопросы'],
+];
+const cta = ctaHref || p + '#lead';
+const menuExtra: [string, string][] = [['#reviews', 'Отзывы'], ['kursy.html', 'Курсы'], ['#lead', 'Бесплатно']];
+---
+<header class="l-hd" id="site-header">
+  <div class="l-shell">
+    <div class="l-glass l-glass--blur l-hd__bar">
+      <a href={home ? '#top' : 'index.html'} class="l-hd__brand" aria-label="Юлия Шабашова — на главную">
+        <img src="assets/imagery/logo-mark.png" alt="" aria-hidden="true" width="28" height="32" style="height:32px;width:auto;display:block" />
+        <span class="l-display" style="font-size:20px;letter-spacing:-.01em;white-space:nowrap">Юлия Шабашова</span>
+      </a>
+      <nav class="l-hd__nav">
+        {nav.map(([id, label]) => (
+          <a href={p + '#' + id}>{label}</a>
+        ))}
+      </nav>
+      <a href="kursy.html" class="sh-btn sh-btn--ghost sh-btn--sm l-hd__courses">Курсы от 990 ₽</a>
+      <a href={cta} class="sh-btn sh-btn--primary sh-btn--sm" style="flex:0 0 auto;border-radius:999px">
+        <span class="l-hd__cta-full">Смотреть выступление</span><span class="l-hd__cta-short">Выступление</span>
+        <Icon name="arrow" size={15} tone="current" />
+      </a>
+      <button type="button" class="sh-iconbtn sh-iconbtn--ghost sh-iconbtn--sm sh-iconbtn--round l-hd__burger" aria-label="Разделы" aria-expanded="false" id="menu-toggle">
+        <Icon name="menu" size={17} tone="ink" class="i-menu" />
+        <Icon name="close" size={17} tone="ink" class="i-close" />
+      </button>
+    </div>
+    <div class="l-glass l-glass--blur l-hd__menu" id="mobile-menu" hidden>
+      {[...nav.map(([id, label]) => [p + '#' + id, label]), ...menuExtra.map(([href, label]) => [href.startsWith('#') ? p + href : href, label])].map(([href, label]) => (
+        <a href={href}>{label}</a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<style is:global>
+  .l-hd{position:fixed;top:0;left:0;right:0;z-index:50;padding:20px 0;transition:padding .5s var(--ease-standard)}
+  .l-hd.is-lifted{padding:12px 0}
+  .l-hd__bar{display:flex;align-items:center;gap:clamp(14px,2.4vw,34px);height:64px;padding:0 14px 0 22px}
+  .l-hd__brand{display:flex;align-items:center;gap:11px;flex:0 0 auto;text-decoration:none;border:0}
+  .l-hd__nav{display:flex;gap:clamp(14px,2vw,26px);margin-right:auto;min-width:0}
+  .l-hd__nav a{padding:6px 0;text-decoration:none;border:0;font-family:var(--font-sans);font-size:14px;font-weight:500;color:var(--text-secondary);white-space:nowrap}
+  .l-hd__courses{flex:0 0 auto}
+  .l-hd__cta-short{display:none}
+  .l-hd__burger{display:none;flex:0 0 auto}
+  .l-hd__burger .i-close{display:none}
+  .l-hd__burger[aria-expanded="true"] .i-menu{display:none}
+  .l-hd__burger[aria-expanded="true"] .i-close{display:block}
+  .l-hd__menu{margin-top:8px;padding:8px 22px 14px}
+  .l-hd__menu a{display:block;border:0;border-bottom:1px solid rgba(77,14,18,.08);padding:15px 0;text-decoration:none;font-family:var(--font-sans);font-size:16px;font-weight:500;color:var(--text-body)}
+  @media (max-width:1040px){
+    .l-hd__nav{display:none}
+    .l-hd__brand{margin-right:auto}
+    .l-hd__burger{display:inline-flex}
+    .l-hd__cta-full{display:none}
+    .l-hd__cta-short{display:inline}
+  }
+  @media (max-width:720px){
+    .l-hd__courses{display:none}
+  }
+</style>

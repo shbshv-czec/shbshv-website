@@ -1,0 +1,85 @@
+---
+/* Отзывы и портреты — с yuliashabashova.ru. Тексты дословные, убраны только эмодзи
+   (бренд-гайд их не допускает). */
+import Icon from './Icon.astro';
+
+interface Props {
+  orgsFirst?: boolean;
+}
+const { orgsFirst = false } = Astro.props;
+
+const P = 'assets/people/reviews/';
+const REVIEWS: [string, string, string, string][] = [
+  ['Торгово-промышленная палата Ярославской области', 'org', 'Вся палата активно обсуждает встречу с Вами! Встряхнули Вы наших сотрудников! Девиз появился: работа теперь без ИИ уже не та и никогда не будет прежней!', '02-tpp.jpg'],
+  ['Анастасия', 'person', 'Я уже внедряю в маркетинге, написали текст к подкасту за 3 мин. Сегодня завтра буду заниматься табличками. Он мой лучший друг — благодаря тебе. Спасибо большое.', '06-anastasia.jpg'],
+  ['Менеджер-клуб. Объединение руководителей', 'org', 'Я даже не ожидал, что практикум будет настолько информативным.', '05-manager-club.jpg'],
+  ['Елена', 'person', '100% пользы, без воды и понятным языком. Я под впечатлением, мне будто открыли двери во что-то новое, красивое, интересное и совершенно не страшно, а интерес зашкаливает.', '08-elena.jpg'],
+  ['Ксения', 'person', 'Раньше смотрела на нейрокреаторов и думала: как они это делают? Боялась даже начинать. После курса страх ушёл — я прошла первый порог. Теперь понимаю, с чего стартовать, и появился азарт копать глубже. Главное — получила структуру: что изучать, а на что время не тратить.', '13-ksenia.jpg'],
+  ['Юлия', 'person', 'Спасибо за инсайдерскую информацию, которая каждую минуту вызвала ВАУ-эмоции и вопрос «А что так можно было?». Технологии и ИИ, конечно, оооочень упрощают процесс анализа заданной информации и выжимки сути.', '01-yulia.jpg'],
+  ['Академия красоты LAREY', 'org', 'Всё очень понравилось! Я рада, что с вами познакомилась и теперь есть такой контакт.', '09-larey.jpg'],
+  ['Анастасия', 'person', 'Очень интересно и понятно! Слушала бы бесконечно! Сейчас я каждый день использую нейросети: в ведении соцсетей рабочих, в личных вопросах, в работе с клиентами. Это высвобождает огромное количество времени, плюс помогает делать работу качественней. Спасибо, что подружила меня с нейронками.', '10-anastasia-2.jpg'],
+  ['Марина', 'person', 'Я пообщалась и создала мини-продукт и лид-магнит прямо с шагами: рилсы, посты и так далее. Это прямо то, что я не могла сформулировать и подобраться к этой теме. А тут целый контент-план! Я в восторге.', '15-marina.jpg'],
+  ['Татьяна', 'person', 'Много полезной и структурированной информации. У меня появилась прекрасная база знаний о ИИ-инструментах и очень много практических возможностей. Отдельно благодарю за информацию про редактирование фото.', '04-tatyana.jpg'],
+  ['Дмитрий', 'person', 'Очень благодарен за курс, узнал много полезного и самое главное начал пользоваться ИИ каждый день!', '07-dmitry.jpg'],
+  ['Екатерина', 'person', 'Информация в доступном для мозга формате: структурно, объёмно и просто одновременно! У меня теперь есть отличный помощник и для работы, и для познания себя, и для увлечений. Круто!', '11-ekaterina.jpg'],
+  ['Ольга', 'person', 'Практикум превосходный. Мне очень понравилось. И я рада, что осуществила задуманное.', '03-olga.jpg'],
+  ['Мария', 'person', 'Удивлена новым возможностям использования ИИ на практике!', '12-maria.jpg'],
+  ['Ольга', 'person', 'Я в восторге! Море вдохновения и идей!', '14-olga-2.jpg'],
+];
+
+const VIDEO = { id: 'c7zH1nr5q8fwovUkRQ26Wp', name: 'Радислав Гандапас', role: 'самый известный в России специалист по лидерству', photo: '01-gandapas.jpg' };
+const V = 'assets/people/video/';
+
+const list = orgsFirst
+  ? [...REVIEWS].sort((a, b) => (a[1] === 'org' ? 0 : 1) - (b[1] === 'org' ? 0 : 1))
+  : REVIEWS;
+const visible = 7;
+---
+<section id="reviews" class="l-section">
+  <div class="l-shell">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:18px;max-width:560px">
+        <span class="l-tag l-rise">Отзывы</span>
+        <h2 class="l-display l-rise" data-d="1" style="font-size:clamp(32px,4.4vw,60px)">Что говорят про работу со мной</h2>
+      </div>
+    </div>
+
+    <div class="l-rise" style="margin-top:clamp(28px,3.4vw,48px);display:flex;justify-content:center">
+      <div class="l-vstage" style="max-width:520px;width:100%">
+        <img src={V + VIDEO.photo} alt={VIDEO.name} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+        <span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(77,14,18,.04) 40%,rgba(77,14,18,.66) 100%)"></span>
+        <button type="button" data-video={VIDEO.id} aria-label={'Смотреть отзыв: ' + VIDEO.name}
+          style="position:absolute;inset:0;border:0;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:18px;padding:0 clamp(18px,2vw,28px)">
+          <span class="l-play"><Icon name="play" size={25} tone="light" /></span>
+          <span style="display:flex;flex-direction:column;gap:4px;text-align:left;min-width:0">
+            <span class="l-display" style="font-size:clamp(19px,1.9vw,26px);color:var(--paper-1);line-height:1.14">{VIDEO.name}</span>
+            <span style="font-family:var(--font-sans);font-size:12.5px;line-height:1.4;color:rgba(255,248,244,.82)">{VIDEO.role}</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="l-cols" style="margin-top:20px">
+      {list.map(([name, kind, text, photo], i) => (
+        <figure class={'l-glass l-quote' + (i < visible ? ' l-rise' : '')} data-d={String((i % 4) + 1)} hidden={i >= visible}
+          style="padding:clamp(24px,2.2vw,32px);margin:0 0 20px;display:flex;flex-direction:column;gap:16px">
+          <blockquote style="margin:0;font-family:var(--font-sans);font-size:15.5px;line-height:1.62;color:var(--text-body)">{text}</blockquote>
+          <figcaption style="display:flex;align-items:center;gap:14px;padding-top:4px">
+            <span class="l-avatar"><img src={P + photo} alt={name} loading="lazy" onerror="this.parentNode.style.display='none'" /></span>
+            <span style="display:flex;flex-direction:column;gap:2px;min-width:0">
+              <span class="l-display" style="font-size:17px;line-height:1.2">{name}</span>
+              {kind === 'org' && <span class="l-tag" style="font-size:10px">организация</span>}
+            </span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <div class="l-rise" style="display:flex;justify-content:center;margin-top:clamp(18px,2vw,28px)">
+      <button type="button" id="reviews-more" class="sh-btn sh-btn--secondary sh-btn--lg" style="border-radius:999px">
+        Показать ещё {REVIEWS.length - visible} отзывов
+        <Icon name="plus" size={15} tone="current" />
+      </button>
+    </div>
+  </div>
+</section>

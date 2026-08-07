@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+
+const CASES: [string, string, string][] = [
+  ['Дайджест новостей', 'Всю неделю собирает ИИ-новости на почту, а раз в неделю присылает готовый черновик в Telegram.', 'case-digest.html'],
+  ['Работа с гардеробом', 'Распознаёт вещи по фото, ведёт каталог и сама собирает коллажи-образы.', 'case-wardrobe.html'],
+  ['Бот для личных финансов', 'Ведёт учёт расходов и показывает картину по деньгам.', ''],
+  ['Бот для управления личной энергией', 'Помогает следить за нагрузкой и не выгорать.', ''],
+  ['«Вселенная дома»', 'Лендинг и бот, который проводит по трём шагам к дому мечты.', ''],
+  ['Этот сайт', 'yuliashabashova.ru тоже собран с ИИ — вы смотрите пример прямо сейчас.', ''],
+];
+---
+<Base
+  title="Кейсы — Юлия Шабашова"
+  description="Telegram-боты, сайты и автоматизация рутины, собранные с ИИ. Примеры работ и рамки задач, которые беру."
+  ctaHref="index.html#lead"
+>
+  <!-- Герой кейсов -->
+  <section id="top" class="l-section" style="padding-top:168px">
+    <div class="l-shell">
+      <div class="l-split" style="align-items:center">
+        <div style="display:flex;flex-direction:column;gap:24px">
+          <span class="l-tag l-rise">Кейсы</span>
+          <h1 class="l-display l-rise" data-d="1" style="font-size:clamp(38px,5.4vw,76px)">
+            Что я собираю <span class="l-italic">с ИИ</span>
+          </h1>
+          <p class="l-lead l-rise" data-d="2" style="max-width:46ch">
+            Я не только учу работать с ИИ, но и сама на нём собираю: сайты, Telegram-боты, автоматизацию мелкой рутины.
+          </p>
+          <p class="l-body l-rise" data-d="3" style="color:var(--text-secondary);max-width:52ch">
+            Часть заказных проектов показать не могу — клиенты не всегда готовы раскрывать, что их продукт сделан на ИИ. Поэтому покажу то, что собрала для себя. По этим работам видно, что можно сделать и вам.
+          </p>
+        </div>
+        <div class="l-rise" data-d="2" style="position:relative">
+          <div class="l-stack__tile l-float" style="position:relative;inset:auto;aspect-ratio:4/3;border-radius:26px">
+            <img src="assets/imagery/prism-crystal.webp" alt="Призма в потоке света" />
+          </div>
+          <div class="l-glass l-glass--blur l-float l-float--c" style="position:absolute;left:4%;bottom:-6%;padding:14px 22px;border-radius:999px;display:flex;align-items:center;gap:12px">
+            <span class="l-tag" style="color:var(--text-secondary)">Собрано руками и ИИ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Сетка кейсов -->
+  <section id="list" class="l-section">
+    <div class="l-shell">
+      <div class="l-grid-2" style="gap:clamp(14px,1.6vw,20px)">
+        {CASES.map(([title, lead, href], i) =>
+          href ? (
+            <a href={href} class="l-glass l-rise l-casecard" data-d={String((i % 4) + 1)}>
+              <span class="l-casecard__cover"><img src="assets/cases/wardrobe-cover.jpg" alt="" loading="lazy" /></span>
+              <span class="l-display" style="font-size:clamp(20px,2.1vw,28px);line-height:1.14">{title}</span>
+              <span style="font-family:var(--font-sans);font-size:15px;line-height:1.6;color:var(--text-secondary)">{lead}</span>
+              <span class="l-casecard__go"><span class="l-tag">Смотреть кейс</span><Icon name="arrow" size={15} /></span>
+            </a>
+          ) : (
+            <div class="l-glass l-rise l-casecard is-soon" data-d={String((i % 4) + 1)}>
+              <span class="l-casecard__cover"><img src="assets/cases/wardrobe-cover.jpg" alt="" loading="lazy" /></span>
+              <span class="l-display" style="font-size:clamp(20px,2.1vw,28px);line-height:1.14">{title}</span>
+              <span style="font-family:var(--font-sans);font-size:15px;line-height:1.6;color:var(--text-secondary)">{lead}</span>
+              <span class="l-casecard__go"><span class="l-tag" style="color:var(--text-faint)">Скоро расскажу</span></span>
+            </div>
+          )
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- Что могу собрать вам -->
+  <section id="order" class="l-section">
+    <div class="l-shell">
+      <div class="l-glass l-glass--sheen l-rise" style="padding:clamp(30px,3.6vw,56px);display:flex;flex-direction:column;gap:26px">
+        <div style="display:flex;align-items:center;gap:14px">
+          <span class="l-tag">Под задачу</span>
+        </div>
+        <h2 class="l-display" style="font-size:clamp(28px,3.6vw,48px);max-width:20ch">
+          Что я могу <span class="l-italic">собрать вам</span>
+        </h2>
+        <div class="l-split" style="gap:clamp(24px,3vw,48px);align-items:start">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <p class="l-body" style="color:var(--text-secondary);max-width:46ch;margin:0">По тем же принципам делаю под задачу:</p>
+            {['Telegram-бот под вашу задачу', 'Автоматизацию повторяющейся рутины', 'Сайт или лендинг'].map((b) => (
+              <span style="display:flex;gap:14px;align-items:flex-start">
+                <span style="margin-top:9px;width:16px;height:1px;background:var(--gold-base);flex:0 0 auto"></span>
+                <span style="font-family:var(--font-sans);font-size:15.5px;line-height:1.6;color:var(--text-body)">{b}</span>
+              </span>
+            ))}
+          </div>
+          <div class="l-glass" style="padding:clamp(20px,2.2vw,28px);display:flex;flex-direction:column;gap:10px">
+            <span class="l-tag">Честно про рамки</span>
+            <p style="margin:0;font-family:var(--font-sans);font-size:15.5px;line-height:1.62;color:var(--text-body)">
+              Беру небольшие и понятные задачи. Сложную автоматизацию процессов в крупной компании не веду — это к другим специалистам. А если хотите собрать что-то сами, разберём на консультации.
+            </p>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <a href="index.html#lead" class="sh-btn sh-btn--primary sh-btn--lg" style="align-self:flex-start;border-radius:999px">
+            Расскажите задачу <Icon name="arrow" size={16} tone="current" />
+          </a>
+          <span style="font-family:var(--font-sans);font-size:13px;color:var(--text-faint)">Обсудим формат и сроки, цена зависит от задачи.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,75 @@
+---
+/* Рендерит текст документа: «## » — раздел, «- » и «• » — списки, остальное — абзацы.
+   Парсинг происходит при сборке — в браузер уезжает чистый HTML. */
+import Icon from './Icon.astro';
+
+interface Props {
+  doc: { self: string; title: string; updated: string; body: string };
+}
+const { doc: d } = Astro.props;
+
+type Block =
+  | { t: 'rule' }
+  | { t: 'h'; s: string }
+  | { t: 'ul'; items: string[] }
+  | { t: 'p'; s: string };
+
+const blocks: Block[] = [];
+let list: { t: 'ul'; items: string[] } | null = null;
+d.body.trim().split('\n').forEach((raw) => {
+  const line = raw.trim();
+  if (!line) { if (list) { blocks.push(list); list = null; } return; }
+  if (line === '---') { if (list) { blocks.push(list); list = null; } blocks.push({ t: 'rule' }); return; }
+  if (line.indexOf('## ') === 0) { if (list) { blocks.push(list); list = null; } blocks.push({ t: 'h', s: line.slice(3) }); return; }
+  if (line.indexOf('- ') === 0 || line.indexOf('• ') === 0) {
+    if (!list) list = { t: 'ul', items: [] };
+    list.items.push(line.slice(2));
+    return;
+  }
+  if (list) { blocks.push(list); list = null; }
+  blocks.push({ t: 'p', s: line });
+});
+if (list) blocks.push(list);
+
+const others = [
+  ['oferta.html', 'Договор оферты'],
+  ['privacy.html', 'Политика конфиденциальности'],
+  ['soglasie.html', 'Согласие на обработку данных'],
+].filter(([href]) => href !== d.self);
+---
+<section id="top" class="l-section" style="padding-top:156px">
+  <div class="l-shell">
+    <a href="index.html" class="l-underline l-rise" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:26px">
+      <span style="width:16px;height:1px;background:var(--gold-base)"></span>На главную
+    </a>
+    <div class="l-legal-head">
+      <span class="l-tag l-rise">Документы</span>
+      <h1 class="l-display l-rise" data-d="1" style="font-size:clamp(30px,4.2vw,56px);max-width:24ch">{d.title}</h1>
+      {d.updated && <span class="l-tag l-rise" data-d="2" style="color:var(--text-faint)">{d.updated}</span>}
+    </div>
+
+    <article class="l-glass l-rise l-legal" data-d="2">
+      {blocks.map((b) =>
+        b.t === 'rule' ? <span class="l-legal__rule"></span>
+        : b.t === 'h' ? <h2 class="l-display l-legal__h">{b.s}</h2>
+        : b.t === 'ul' ? (
+          <ul class="l-legal__ul">
+            {b.items.map((it) => <li><span class="l-legal__dash"></span>{it}</li>)}
+          </ul>
+        )
+        : <p class="l-legal__p">{b.s}</p>
+      )}
+    </article>
+
+    <div class="l-glass l-rise l-legal-nav">
+      <span class="l-tag" style="color:var(--text-gold)">Другие документы</span>
+      <div style="display:flex;flex-wrap:wrap;gap:10px 22px">
+        {others.map(([href, l]) => (
+          <a href={href} class="l-underline" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px">
+            {l}<Icon name="arrow" size={13} />
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

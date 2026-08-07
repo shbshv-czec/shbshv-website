@@ -1,0 +1,279 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Reviews from '../components/Reviews.astro';
+
+const COURSES = [
+  {
+    id: 'week',
+    name: 'ИИ за неделю',
+    sub: 'от новичка до уверенного пользователя',
+    who: 'для тех, кто не технарь, но хочет разобраться',
+    format: '5 понятных уроков в Telegram по 5–10 минут плюс вводный урок для новичков',
+    inside: [
+      'Как работает ИИ простым языком и что из него работает в России',
+      'Как построить запрос, чтобы получать результат, а не отписку',
+      'Какой сервис выбрать под задачу: ChatGPT, Claude, Gemini, DeepSeek, Алиса, ГигаЧат',
+      'Генерация контента: картинки, презентация за 5 минут, озвучка, видео, цифровой аватар',
+      'Умный поиск и работа с вашими файлами',
+      'Как встроить ИИ в жизнь и с чего начать',
+    ],
+    out: 'Навык общения с ИИ, готовые визуалы без дизайнера, шаблоны для работы и дома, проверенный список сервисов и спокойное «я умею».',
+    plus: 'PDF-конспекты, библиотека промптов копируй-вставляй, все ссылки, 20+ готовых промптов бонусом.',
+    when: 'Первый урок придёт сразу после оплаты.',
+    was: '3 900 ₽',
+    now: '990 ₽',
+    rating: 'Средняя оценка курса — 9 из 10 по опросам учеников.',
+    cta: 'Пройти за 990 ₽',
+    cover: 'assets/imagery/course-week-preview.jpg',
+    slot: '',
+  },
+  {
+    id: 'expert',
+    name: 'ИИ для эксперта',
+    sub: 'от хаоса в голове к чёткой стратегии',
+    who: 'для тех, кто уже работает с ИИ и хочет продавать свою экспертность',
+    format: 'практикум на 2–3 часа, проходится за вечер',
+    inside: [
+      'Видео-настройка: зачем эксперту ИИ',
+      'Готовые промпты под задачу',
+      'Бот-методолог, который сам соберёт вам продуктовую линейку с ценами',
+    ],
+    out: 'Ясное позиционирование без самозванца, карта аудитории с болями и желаниями, продуктовая линейка от лид-магнита до флагмана, контент-план с темами и продающими текстами, понимание, как расти дальше по шагам.',
+    plus: 'За один вечер сделаете то, что откладывали годами: разложите, кто вы и зачем людям, придумаете продукт, который купят, получите контент на месяц вперёд.',
+    when: 'Ссылка на вход придёт сразу после оплаты.',
+    was: '5 900 ₽',
+    now: '1 900 ₽',
+    rating: '',
+    cta: 'Собрать стратегию за 1 900 ₽',
+    cover: '',
+    slot: 'Кадры из уроков',
+  },
+];
+
+const NAV = [
+  ['Только пробуете ИИ', 'вам «ИИ за неделю»', '#week'],
+  ['Уже работаете с ИИ и хотите продавать экспертность', 'вам «ИИ для эксперта»', '#expert'],
+  ['Не уверены', 'пройдите оба по порядку — они дополняют друг друга', '#week'],
+];
+
+const QA = [
+  ['Я совсем новичок, будет понятно?', 'Да. «ИИ за неделю» с нуля: куда зайти, что написать. Технических знаний не нужно.'],
+  ['У меня Mac, Windows или телефон — подойдёт?', 'Да. ИИ работает через браузер на любом устройстве.'],
+  ['Сколько времени займёт?', 'Базовый курс — уроки по 5–10 минут, проходится за выходные. Практикум для эксперта — вечер.'],
+  ['Материалы останутся у меня?', 'Да, всё хранится в Telegram, возвращаетесь когда угодно.'],
+  ['Чем курсы отличаются?', '«ИИ за неделю» даёт базу для всех. «ИИ для эксперта» — для тех, кто уже работает с ИИ и хочет упаковать и продавать экспертность.'],
+  ['Как вернуть деньги, если не будет результата?', 'Пройдите все уроки. Если результата нет — напишите мне, верну 100% оплаты. Условия возврата описаны в оферте.'],
+];
+---
+<Base
+  title="Курсы по ИИ для бизнеса и экспертов — Юлия Шабашова"
+  description="Два практикума по работе с нейросетями: база с нуля и упаковка эксперта. На понятном языке, с гарантией возврата. От 990 ₽."
+  ctaHref="#list"
+>
+  <!-- Герой курсов -->
+  <section id="top" class="l-section" style="padding-top:164px">
+    <div class="l-shell">
+      <div class="l-split" style="align-items:center">
+        <div style="display:flex;flex-direction:column;gap:24px">
+          <span class="l-tag l-rise">Курсы · от 990 ₽</span>
+          <h1 class="l-display l-rise" data-d="1" style="font-size:clamp(36px,5vw,72px)">
+            Курсы по ИИ — от первого запроса до своей <span class="l-italic">продуктовой линейки</span>
+          </h1>
+          <p class="l-lead l-rise" data-d="2" style="max-width:44ch">
+            Два практикума на понятном языке. Начните с азов или соберите стратегию эксперта за вечер.
+          </p>
+          <div class="l-rise" data-d="3" style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="#week" class="sh-btn sh-btn--primary sh-btn--lg" style="border-radius:999px">Начать с азов — 990 ₽ <Icon name="arrow" size={16} tone="current" /></a>
+            <a href="#expert" class="sh-btn sh-btn--secondary sh-btn--lg" style="border-radius:999px">Практикум для эксперта</a>
+          </div>
+          <div class="l-glass l-glass--blur l-rise" data-d="4" style="padding:18px 24px;display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,38px);border-radius:20px">
+            {[['9 из 10', 'средняя оценка'], ['250+', 'учеников'], ['100%', 'возврат, если без результата']].map(([b, s]) => (
+              <div style="display:flex;flex-direction:column;gap:3px">
+                <span class="l-display" style="font-size:26px;line-height:1">{b}</span>
+                <span class="l-tag">{s}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="l-rise" data-d="2" style="position:relative">
+          <div class="l-stack__tile l-float" style="position:relative;inset:auto;aspect-ratio:4/5;max-height:560px;margin-left:auto;border-radius:26px">
+            <div class="l-imgslot">Фото: вы на выступлении или за работой</div>
+          </div>
+          <div class="l-glass l-glass--blur l-float l-float--c" style="position:absolute;left:-4%;bottom:10%;padding:14px 22px;border-radius:999px;display:flex;align-items:center;gap:12px">
+            <span class="l-tag" style="color:var(--text-secondary)">Первый урок — сразу после оплаты</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- С чего начать -->
+  <section class="l-section" style="padding-top:clamp(26px,3.2vw,52px)">
+    <div class="l-shell">
+      <div style="display:flex;align-items:center;gap:20px;margin-bottom:20px">
+        <span class="l-tag l-rise">С чего начать</span>
+      </div>
+      <div class="l-grid-3">
+        {NAV.map(([q, a, go], i) => (
+          <a href={go} class="l-glass l-rise l-navcard" data-d={String(i + 1)} style="text-decoration:none;border:1px solid rgba(255,255,255,.6)">
+            <span style="font-family:var(--font-sans);font-size:15.5px;line-height:1.55;color:var(--text-secondary)">{q} —</span>
+            <span class="l-display" style="font-size:clamp(19px,1.9vw,24px);line-height:1.18">{a}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Курсы -->
+  <section id="list" class="l-section" style="padding-top:clamp(26px,3.2vw,52px)">
+    <div class="l-shell" style="display:flex;flex-direction:column;gap:clamp(18px,2.2vw,28px)">
+      {COURSES.map((c) => (
+        <article id={c.id} class="l-glass l-glass--sheen l-rise l-course">
+          <div class="l-course__body">
+            <div class="l-course__head">
+              <span class="l-tag">{c.who}</span>
+              <h2 class="l-display" style="font-size:clamp(30px,3.6vw,50px);line-height:1.04">{c.name}</h2>
+              <span class="l-italic" style="font-size:clamp(18px,1.9vw,25px);color:var(--text-muted)">{c.sub}</span>
+              <p class="l-body" style="margin:6px 0 0;color:var(--text-secondary);max-width:46ch">{c.format}</p>
+            </div>
+
+            <div class="l-course__row">
+              <span class="l-tag" style="color:var(--text-gold)">Что внутри</span>
+              <ul class="l-course__list">
+                {c.inside.map((b) => (
+                  <li><span class="l-course__dash"></span><span>{b}</span></li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="l-course__row">
+              <span class="l-tag" style="color:var(--text-gold)">С чем уйдёте</span>
+              <p style="margin:0;font-family:var(--font-sans);font-size:15.5px;line-height:1.62;color:var(--text-body);max-width:80ch">{c.out}</p>
+            </div>
+
+            <div class="l-course__row">
+              <span class="l-tag" style="color:var(--text-gold)">Плюс</span>
+              <p style="margin:0;font-family:var(--font-sans);font-size:15.5px;line-height:1.62;color:var(--text-secondary);max-width:84ch">{c.plus}</p>
+            </div>
+
+            <div class="l-course__foot">
+              {c.cover ? (
+                <figure class="l-peek">
+                  <img src={c.cover} alt={'Кадры из уроков курса «' + c.name + '»'} loading="lazy" />
+                  <figcaption>Так выглядят уроки</figcaption>
+                </figure>
+              ) : (
+                <div class="l-peek l-peek--empty" style="position:relative">
+                  <div class="l-imgslot">{c.slot}</div>
+                </div>
+              )}
+              <div class="l-course__buy">
+                <span class="l-price">
+                  <span class="l-price-was">{c.was}</span>
+                  <span class="l-price-now">{c.now}</span>
+                </span>
+                {c.rating && <span class="l-course__note">{c.rating}</span>}
+                <button type="button" data-pay class="sh-btn sh-btn--primary sh-btn--lg" style="border-radius:999px;align-self:flex-start;margin-top:4px">
+                  {c.cta} <Icon name="arrow" size={16} tone="current" />
+                </button>
+                <span class="l-course__note">Пройдёте все уроки без результата — верну 100% оплаты. {c.when}</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Скоро больше -->
+  <section class="l-section" style="padding-top:clamp(26px,3.2vw,52px)">
+    <div class="l-shell">
+      <div class="l-glass l-rise" style="padding:clamp(26px,3vw,44px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;border-style:dashed">
+        <div style="display:flex;flex-direction:column;gap:10px;max-width:48ch">
+          <div style="display:flex;align-items:center;gap:14px">
+            <span class="l-display" style="font-size:clamp(22px,2.4vw,32px)">Скоро больше</span>
+          </div>
+          <p class="l-body" style="margin:0;color:var(--text-secondary)">
+            Готовлю новые практикумы, в том числе «ИИ для руководителя». Подпишитесь на канал — там анонсы первыми.
+          </p>
+        </div>
+        <button type="button" class="sh-btn sh-btn--secondary" style="border-radius:999px">
+          Подписаться на канал <Icon name="arrowUp" size={15} tone="current" />
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Гарантия -->
+  <section class="l-section" style="padding-top:clamp(26px,3.2vw,52px)">
+    <div class="l-shell">
+      <div class="l-glass l-glass--ink l-glass--sheen l-rise" style="padding:clamp(30px,4vw,60px);display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:center">
+        <Icon name="checkRing" size={40} tone="light" strokeWidth={0.85} />
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span class="l-display" style="font-size:clamp(26px,3vw,40px);color:var(--paper-1)">Гарантия</span>
+          <p style="margin:0;font-family:var(--font-sans);font-size:16.5px;line-height:1.62;color:var(--text-inverse-muted);max-width:52ch">
+            Пройдите все уроки. Если результата не будет — верну 100% оплаты. Спокойно попробуйте: вы ничем не рискуете.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Цитата -->
+  <section class="l-section" style="padding-top:clamp(26px,3.2vw,52px)">
+    <div class="l-shell">
+      <div class="l-glass l-glass--gold l-rise" style="padding:clamp(32px,4vw,64px);text-align:center;display:flex;flex-direction:column;gap:18px;align-items:center">
+        <p class="l-display" style="font-size:clamp(26px,3.8vw,54px);max-width:20ch;margin:0">
+          «Работа теперь без ИИ уже не та и <span class="l-italic">никогда не будет прежней</span>»
+        </p>
+        <span class="l-tag" style="color:var(--text-secondary)">Торгово-промышленная палата Ярославской области</span>
+      </div>
+    </div>
+  </section>
+
+  <Reviews orgsFirst />
+
+  <!-- Вопрос — ответ -->
+  <section id="faq" class="l-section" style="padding-top:clamp(26px,3.2vw,52px)">
+    <div class="l-shell">
+      <div style="display:flex;align-items:center;gap:20px;margin-bottom:20px">
+        <span class="l-tag l-rise">Вопрос — ответ</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        {QA.map(([q, a], i) => (
+          <div class={'l-glass l-rise l-acc' + (i === 0 ? ' is-open' : '')} data-d={String((i % 4) + 1)} style="padding:0">
+            <button type="button" data-acc="course-faq"
+              style="width:100%;border:0;background:none;cursor:pointer;text-align:left;padding:clamp(18px,2vw,26px);display:flex;align-items:center;gap:20px;justify-content:space-between">
+              <span style="font-family:var(--font-sans);font-size:clamp(15.5px,1.5vw,17.5px);font-weight:500;color:var(--ink-900)">{q}</span>
+              <Icon name="plus" size={19} tone="ink" class="i-closed" />
+              <Icon name="minus" size={19} tone="ink" class="i-open" />
+            </button>
+            <div class="l-open">
+              <div>
+                <p style="margin:0;padding:0 clamp(18px,2vw,26px) clamp(20px,2vw,26px);font-family:var(--font-sans);font-size:15.5px;line-height:1.66;color:var(--text-secondary);max-width:62ch">{a}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Личная консультация -->
+  <section class="l-section" style="padding-top:clamp(26px,3.2vw,52px)">
+    <div class="l-shell">
+      <div class="l-glass l-rise" style="padding:clamp(22px,2.4vw,34px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px">
+        <div style="display:flex;flex-direction:column;gap:6px;max-width:56ch">
+          <span class="l-display" style="font-size:clamp(18px,1.9vw,24px)">Нужен разбор ваших задач, а не общий курс?</span>
+          <p style="margin:0;font-family:var(--font-sans);font-size:14.5px;line-height:1.6;color:var(--text-secondary)">
+            Провожу личные и командные консультации: смотрю вашу работу и показываю, что и как упростить с ИИ.
+          </p>
+        </div>
+        <a class="l-underline" href="index.html#offer" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none">
+          Про консультации<Icon name="arrow" size={15} />
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

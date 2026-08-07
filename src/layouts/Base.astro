@@ -1,0 +1,51 @@
+---
+/* Общий каркас страницы: head, фон, шапка, подвал, cookie-бар, тост, скрипт. */
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  home?: boolean;
+  ctaHref?: string;
+}
+const { title, description, home = false, ctaHref } = Astro.props;
+---
+<!doctype html>
+<html lang="ru" data-accent="gold" data-slab="sky" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/imagery/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/imagery/favicon-16.png" />
+    <link rel="apple-touch-icon" href="assets/imagery/apple-touch-icon.png" />
+    <script is:inline>document.documentElement.classList.remove('no-js');</script>
+  </head>
+  <body>
+    <div class="l-bg"></div>
+    <div class="l-bg-glow" aria-hidden="true"></div>
+
+    <Header home={home} ctaHref={ctaHref} />
+
+    <slot />
+
+    <Footer />
+
+    <div class="sh-toaststack sh-toaststack--br" id="toast-stack" hidden>
+      <div class="sh-toast sh-toast--positive" role="status">
+        <span class="sh-toast__mark" aria-hidden="true"></span>
+        <span class="sh-toast__text">
+          <span class="sh-toast__title" id="toast-title"></span>
+          <span class="sh-toast__desc" id="toast-desc"></span>
+        </span>
+        <button type="button" class="sh-toast__close" id="toast-close" aria-label="Закрыть">×</button>
+      </div>
+    </div>
+
+    <script src="../scripts/site.js"></script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+---
+/* Подвал + уведомление о cookies (152-ФЗ). */
+const S = 'assets/icons/social/';
+const nav = [
+  ['index.html#audience', 'Для кого'],
+  ['index.html#about', 'Обо мне'],
+  ['index.html#offer', 'Как работать'],
+  ['kursy.html', 'Курсы'],
+  ['cases.html', 'Кейсы'],
+  ['index.html#reviews', 'Отзывы'],
+  ['index.html#faq', 'Вопросы'],
+];
+const contacts = [
+  ['telegram.svg', 'Telegram', '@shbshv_support_bot', 'https://t.me/shbshv_support_bot'],
+  ['vk.svg', 'ВКонтакте', 'Юлия Шабашова', 'https://vk.com/'],
+  ['mail.svg', 'Почта', 'yulia@shabashova.ru', 'mailto:yulia@shabashova.ru'],
+];
+---
+<footer style="margin-top:clamp(80px,10vw,140px);padding:0 0 24px">
+  <div class="l-shell">
+    <div class="l-glass l-glass--ink l-glass--sheen" style="padding:clamp(32px,4vw,56px)">
+      <div class="l-foot">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <span class="l-display" style="display:flex;align-items:center;gap:14px;font-size:clamp(28px,3vw,40px);color:var(--paper-1)">
+            <img src="assets/imagery/logo-mark.png" alt="" aria-hidden="true" style="height:1.15em;width:auto;display:block" />
+            Юлия Шабашова
+          </span>
+          <p class="l-body" style="color:var(--text-inverse-muted);max-width:32ch">
+            Учу бизнес и экспертов работать с ИИ спокойно. Перевожу с технического на человеческий.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px">
+            <span class="l-tag" style="color:var(--text-inverse-muted)">ИП Шабашова Юлия Валентиновна</span>
+            <div class="l-docs">
+              <a href="oferta.html">Договор оферты</a>
+              <a href="privacy.html">Политика конфиденциальности</a>
+              <a href="soglasie.html">Согласие на обработку данных</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <span class="l-tag" style="color:var(--gold-light)">Разделы</span>
+          <nav class="l-footnav" aria-label="Разделы сайта">
+            {nav.map(([href, label]) => <a href={href}>{label}</a>)}
+          </nav>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <span class="l-tag" style="color:var(--gold-light)">Контакты</span>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            {contacts.map(([icon, name, value, href]) => (
+              <a href={href} class="l-contact">
+                <span class="l-contact__ic"><img src={S + icon} alt="" /></span>
+                <span style="display:flex;flex-direction:column;gap:1px;min-width:0">
+                  <span class="l-tag" style="color:var(--gold-light);font-size:10px">{name}</span>
+                  <span style="font-family:var(--font-sans);font-size:15px;line-height:1.4;color:var(--text-inverse-muted)">{value}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="l-cookies" id="cookie-bar" role="region" aria-label="Уведомление о файлах cookie" hidden>
+    <p>Сайт использует файлы cookie и обрабатывает данные о посещении — это нужно, чтобы страницы работали корректно. Продолжая пользоваться сайтом, вы соглашаетесь с <a href="privacy.html">политикой конфиденциальности</a>.</p>
+    <button type="button" class="l-cookies__ok" data-cookie-ok>Хорошо</button>
+    <button type="button" class="l-cookies__x" data-cookie-ok aria-label="Закрыть">×</button>
+  </div>
+</footer>

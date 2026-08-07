@@ -1,0 +1,79 @@
+---
+/* Разворот одного кейса. Данные приходят из страницы. */
+import Icon from './Icon.astro';
+
+interface Props {
+  tag: string;
+  title: [string, string];
+  lead: string;
+  blocks: [string, string][];
+  steps: string[];
+  cover?: string;
+  slots: [string, string][];
+}
+const { tag, title, lead, blocks, steps, cover, slots } = Astro.props;
+---
+<section id="top" class="l-section" style="padding-top:164px">
+  <div class="l-shell">
+    <a href="cases.html" class="l-underline l-rise" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:26px">
+      <span style="width:16px;height:1px;background:var(--gold-base)"></span>Все кейсы
+    </a>
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <span class="l-tag l-rise">{tag}</span>
+      <h1 class="l-display l-rise" data-d="1" style="font-size:clamp(34px,5vw,68px);max-width:18ch">
+        {title[0]}<br /><span class="l-italic">{title[1]}</span>
+      </h1>
+      <p class="l-lead l-rise" data-d="2" style="max-width:48ch">{lead}</p>
+    </div>
+
+    {cover && (
+      <div class="l-stack__tile l-rise" data-d="3" style="position:relative;inset:auto;aspect-ratio:3/2;margin-top:clamp(28px,3.4vw,44px)">
+        <img src={cover} alt="" loading="lazy" />
+      </div>
+    )}
+
+    <div class="l-rise l-grid-2" data-d="3" style="margin-top:clamp(14px,1.6vw,20px)">
+      {slots.map(([, label]) => (
+        <div class="l-stack__tile" style="position:relative;inset:auto;aspect-ratio:4/3;border-radius:22px">
+          <div class="l-imgslot">{label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="l-section" style="padding-top:clamp(26px,3.2vw,52px)">
+  <div class="l-shell">
+    <div style="display:flex;flex-direction:column;gap:clamp(14px,1.6vw,20px)">
+      {blocks.map(([btitle, text], i) => (
+        <div class="l-glass l-rise" data-d={String((i % 4) + 1)} style="padding:clamp(24px,2.6vw,38px);display:grid;gap:clamp(14px,1.6vw,20px)">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <span class="l-display" style="font-size:clamp(20px,2vw,27px);line-height:1.16">{btitle}</span>
+            <p style="margin:0;font-family:var(--font-sans);font-size:16px;line-height:1.68;color:var(--text-body);max-width:62ch">{text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="l-glass l-glass--sheen l-rise" style="margin-top:clamp(14px,1.6vw,20px);padding:clamp(24px,2.6vw,38px);display:flex;flex-direction:column;gap:18px">
+      <span class="l-tag" style="color:var(--text-gold)">Как работает, по шагам</span>
+      <ol class="l-steps">
+        {steps.map((s, i) => (
+          <li><span class="l-steps__n">{i + 1}</span><span>{s}</span></li>
+        ))}
+      </ol>
+    </div>
+
+    <div class="l-glass l-glass--ink l-glass--sheen l-rise" style="margin-top:clamp(24px,3vw,44px);padding:clamp(30px,3.6vw,52px);display:flex;flex-direction:column;gap:20px">
+      <p class="l-display" style="font-size:clamp(24px,2.8vw,38px);color:var(--paper-1);max-width:22ch;margin:0">
+        Такое я могу собрать <span class="l-italic" style="color:var(--gold-light)">и вам</span>
+      </p>
+      <p style="margin:0;font-family:var(--font-sans);font-size:15.5px;line-height:1.62;color:var(--text-inverse-muted);max-width:46ch">
+        Расскажите задачу — обсудим формат, сроки и что реально имеет смысл автоматизировать.
+      </p>
+      <a href="index.html#lead" class="sh-btn sh-btn--inverse" style="align-self:flex-start;border-radius:999px">
+        Обсудить задачу <Icon name="arrow" size={15} tone="current" />
+      </a>
+    </div>
+  </div>
+</section>

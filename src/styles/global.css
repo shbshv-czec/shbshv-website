@@ -1,0 +1,64 @@
+/* Общая точка входа стилей. Astro склеит все @import в один файл при сборке.
+   Шрифты самодостаточные (@fontsource) — без запросов к Google Fonts:
+   сайт должен открываться быстро даже на слабом мобильном интернете. */
+
+/* Cormorant — дисплейный (заголовки, цифры, курсивный акцент) */
+@import "@fontsource/cormorant/cyrillic-400.css";
+@import "@fontsource/cormorant/cyrillic-500.css";
+@import "@fontsource/cormorant/cyrillic-600.css";
+@import "@fontsource/cormorant/cyrillic-700.css";
+@import "@fontsource/cormorant/latin-400.css";
+@import "@fontsource/cormorant/latin-500.css";
+@import "@fontsource/cormorant/latin-600.css";
+@import "@fontsource/cormorant/latin-700.css";
+@import "@fontsource/cormorant/cyrillic-400-italic.css";
+@import "@fontsource/cormorant/cyrillic-500-italic.css";
+@import "@fontsource/cormorant/latin-400-italic.css";
+@import "@fontsource/cormorant/latin-500-italic.css";
+
+/* Montserrat — текстовый */
+@import "@fontsource/montserrat/cyrillic-400.css";
+@import "@fontsource/montserrat/cyrillic-500.css";
+@import "@fontsource/montserrat/cyrillic-600.css";
+@import "@fontsource/montserrat/cyrillic-700.css";
+@import "@fontsource/montserrat/latin-400.css";
+@import "@fontsource/montserrat/latin-500.css";
+@import "@fontsource/montserrat/latin-600.css";
+@import "@fontsource/montserrat/latin-700.css";
+
+/* Токены бренда */
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/radii.css";
+@import "./tokens/elevation.css";
+@import "./tokens/materials.css";
+@import "./tokens/motion.css";
+@import "./tokens/base.css";
+
+/* Компоненты дизайн-системы (только используемые) */
+@import "./ds.css";
+
+/* Вёрстка страниц */
+@import "./landing.css";
+
+/* Без JS секции не должны оставаться невидимыми */
+.no-js .l-rise{opacity:1;transform:none}
+
+/* Атрибут hidden сильнее любых display-правил компонентов */
+[hidden]{display:none!important}
+
+/* Базовый вид знаков FacetMark (без инлайновых стилей, чтобы их можно было прятать) */
+.fm{display:block;overflow:visible}
+
+/* Якоря учитывают фиксированную шапку (заменяет JS-скролл со смещением) */
+[id]{scroll-margin-top:110px}
+
+/* Аккордеон: is-open на элементе .l-acc открывает панель и меняет плюс на минус */
+.l-acc.is-open .l-open{grid-template-rows:1fr}
+.l-acc .i-open{display:none}
+.l-acc.is-open .i-open{display:block}
+.l-acc.is-open .i-closed{display:none}
+
+/* Без JS: cookie-бар и тосты не появятся (они и не нужны), аккордеоны открыты */
+.no-js .l-acc .l-open{grid-template-rows:1fr}

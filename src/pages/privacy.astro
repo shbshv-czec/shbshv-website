@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import LegalPage from '../components/LegalPage.astro';
+import doc from '../data/legal-privacy.mjs';
+---
+<Base
+  title="Политика конфиденциальности — Юлия Шабашова"
+  description="Политика в отношении обработки персональных данных ИП Шабашова Юлия Валентиновна."
+  ctaHref="index.html#lead"
+>
+  <LegalPage doc={doc} />
+</Base>

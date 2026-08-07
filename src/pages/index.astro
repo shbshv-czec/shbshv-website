@@ -1,0 +1,432 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Reviews from '../components/Reviews.astro';
+
+/* ── Данные секций (текст один в один из прежнего app.js) ── */
+const AUD_CASES = [
+  'Вы руководите и видите, что команда тратит часы на то, что ИИ делает за минуты.',
+  'Вы эксперт, и на вас висит весь контент, тексты и упаковка, а времени на это нет.',
+  'Вы пробовали нейросети, получили в ответ ерунду и решили, что это не для вас.',
+  'Вы думаете, что не разберётесь, потому что вы не технарь. Разберётесь.',
+];
+
+const FACTS = [
+  'Предприниматель, в IT с 2012 года',
+  'Научила работать с ИИ больше 250 человек',
+  'Курировала внедрение CRM, разработку сайтов, SEO',
+  'Работала с крупными брендами и медийными персонами',
+  'Веду канал «ИИ на спокойном»',
+];
+
+const T = 'assets/people/talks/';
+/* Отбор: семь сильных кадров. Отсеяны тёмные, издалека, с перекрытым кадром,
+   дубль группового портрета и кадр на фоне чужого лозунга (14). */
+const SHOTS = ['talk-05.jpg', 'talk-11.jpg', 'talk-03.jpg', 'talk-17.jpg', 'talk-15.jpg', 'talk-07.jpg', 'talk-02.jpg'];
+
+const VENUES = ['Торгово-промышленная палата', 'Менеджер-клуб', 'HR-клуб', 'Дизайн-выходные', 'Ярославский колледж управления', 'Женский синдикат', '«Код легенды»', 'Академия красоты Larey', 'Супертур76', 'Креативный квартал «Фабрика КОРД»'];
+
+const RESULTS = [
+  ['Регламент', 'из одного созвона', 'руководитель проекта', 'Расшифровку полуторачасового совещания ИИ собрал в готовый регламент и презентацию к нему. Руководителю осталось причесать.'],
+  ['Анализ рынка', 'своими силами', 'сфера гостеприимства', 'Цены конкурентов, тренды, позиционирование. То, ради чего обычно зовут подрядчика, теперь собирается самостоятельно и быстро.'],
+  ['Инструкции для команды', 'за вечер', 'сфера гостеприимства', 'Чек-листы для администраторов на острые ситуации и правила для персонала. То, до чего долго не доходили руки.'],
+  ['От опаски', 'к работе каждый день', 'была новичком', 'Начинала с нуля и с осторожностью. Теперь общается с ИИ каждый день, а качество запросов выросло в разы.'],
+];
+
+const OFFERS: [string, string, string, string[], string, string, boolean, string[]][] = [
+  ['ИИ за неделю', '990 ₽', 'Если начинаете с нуля. Шесть коротких уроков в Telegram.',
+   ['Шесть уроков по 10–15 минут', 'Читать и делать можно в транспорте', 'Доступ остаётся навсегда'], 'Подробнее о курсе', 'kursy.html#week', false,
+   ['онлайн', 'самостоятельно']],
+  ['ИИ для эксперта', '1 900 ₽', 'Если уже работаете с ИИ и хотите упаковать себя и свои продукты. Практикум на вечер.',
+   ['Один вечер практики', 'Упаковка себя, продукта и контента', 'Готовые рабочие контуры'], 'Подробнее о курсе', 'kursy.html#expert', false,
+   ['онлайн', 'самостоятельно']],
+  ['Личная консультация', '15 000 ₽', 'Если у вас свои задачи и типовые советы не подходят. Полтора часа в зуме, разбираем именно вашу работу.',
+   ['Полтора часа в зуме', 'Смотрю вашу реальную работу', 'Запись и конспект после встречи'], 'Записаться', '', true,
+   ['онлайн', 'офлайн — Ярославль']],
+  ['Обучение для команды', 'от 20 000 ₽', 'Когда с ИИ нужно подружить не вас одного, а всю команду. Групповая консультация или мастер-класс.',
+   ['Групповая консультация или мастер-класс', 'Программа под ваши процессы', 'Оплата по счёту на ИП'], 'Обсудить', '', false,
+   ['онлайн', 'офлайн — Ярославль']],
+];
+
+const CONSENTS: [string, string][] = [
+  ['oferta', 'Принимаю <a href="oferta.html" target="_blank" rel="noopener">условия оферты</a>'],
+  ['pdn', 'Даю согласие на <a href="soglasie.html" target="_blank" rel="noopener">обработку персональных данных</a>'],
+  ['privacy', 'Согласна с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>'],
+];
+
+const QA: [string, string, string?][] = [
+  ['Я совсем новичок, разберусь?', 'Да. Я объясняю с нуля и на понятном языке. Если справляетесь с телефоном и почтой — этого достаточно, чтобы начать.'],
+  ['За нейросети надо платить? И что из них работает в России?', 'Часть инструментов бесплатные, часть платные. На курсах и консультациях показываю, что работает из России и как это настроить.'],
+  ['Сколько времени это займёт?', 'Базовый курс — несколько вечеров. Консультация — полтора часа. Дальше вы работаете сами.'],
+  ['Чем консультация отличается от курса?', 'Курс — общая база для всех. Консультация — про ваши задачи: я смотрю вашу работу и показываю, что и как упростить.'],
+  ['Мне некогда разбираться самой, но нужна автоматизация простой повторяющейся рутины. Это можно заказать у вас?', 'Да, небольшие задачи беру. Загляните в кейсы — там примеры того, что я собираю с ИИ. Расскажете свою задачу, обсудим.', 'cases.html'],
+  ['Как оплатить и получить доступ?', 'Курсы — картой на сайте, ссылку на материалы пришлю после оплаты. Консультации и обучение — картой или по счёту на реквизиты ИП.'],
+];
+
+const RAIL = [['top', 'Начало'], ['audience', 'Для кого'], ['about', 'Обо мне'], ['results', 'Результаты'], ['offer', 'Обучение'], ['cases', 'Кейсы'], ['reviews', 'Отзывы'], ['lead', 'Бесплатно'], ['faq', 'Вопросы']];
+---
+<Base
+  title="Юлия Шабашова — обучение работе с ИИ для бизнеса и экспертов"
+  description="Учу предпринимателей, руководителей и экспертов работать с нейросетями спокойно и на понятном языке. Курсы от 990 ₽, консультации, выступления."
+  home
+>
+  <!-- Рельс разделов справа -->
+  <nav class="l-rail l-glass l-glass--blur" aria-label="Разделы">
+    {RAIL.map(([id, label]) => (
+      <a href={'#' + id} data-rail={id} aria-current="false" title={label} style="display:flex;align-items:center;gap:10px;border:0;padding:6px 4px;text-decoration:none;color:var(--text-faint)">
+        <span class="dot"></span><span class="lbl">{label}</span>
+      </a>
+    ))}
+  </nav>
+
+  <!-- Герой -->
+  <section id="top" style="min-height:100vh;display:flex;align-items:center;padding-top:120px;padding-bottom:40px">
+    <div class="l-shell" style="width:100%">
+      <div class="l-split">
+        <div style="display:flex;flex-direction:column;gap:26px">
+          <span class="l-tag l-rise">Обучение работе с ИИ · в IT с 2012 года</span>
+          <h1 class="l-display l-rise" data-d="1" style="font-size:clamp(44px,6.2vw,92px)">
+            Учу бизнес<br />и экспертов<br />работать с ИИ <span class="l-italic">спокойно</span>
+          </h1>
+          <p class="l-lead l-rise" data-d="2" style="max-width:42ch">
+            С нуля, по шагам, без гонки за новинками.
+          </p>
+          <div class="l-rise" data-d="3" style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="#lead" class="sh-btn sh-btn--primary sh-btn--lg" style="border-radius:999px">Смотреть выступление <Icon name="arrow" size={16} tone="current" /></a>
+            <a href="kursy.html" class="sh-btn sh-btn--secondary sh-btn--lg">Курсы от 990 ₽</a>
+          </div>
+
+          <div class="l-glass l-glass--blur l-rise" data-d="4" style="margin-top:10px;padding:22px 26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:22px;border-radius:22px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span class="l-tag">обучила</span>
+              <span class="l-display" style="font-size:30px;line-height:1.12"><span data-count="250" data-suffix="+">250+</span> человек</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span class="l-tag">в IT с</span>
+              <span class="l-display" style="font-size:30px;line-height:1.12">2012 года</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span class="l-tag">выступала для</span>
+              <span class="l-display" style="font-size:22px;line-height:1.12">ЯрТПП · Дизайн-выходные</span>
+            </div>
+          </div>
+
+          <div class="l-scrollcue l-rise" data-d="4" style="margin-top:6px"><i></i></div>
+        </div>
+
+        <!-- Плавающие стеклянные плитки — материал, а не декор -->
+        <div class="l-stack l-rise" data-d="2">
+          <div class="l-stack__tile l-float" data-par="14" style="inset:0% 32% 14% 0%">
+            <img src="assets/people/yulia-hero-v5.jpg" alt="Юлия Шабашова" fetchpriority="high" />
+          </div>
+          <div class="l-stack__tile l-float l-float--b" data-par="-22" style="inset:48% 0% 4% 52%">
+            <img src="assets/imagery/prism-crystal.webp" alt="Призма в потоке света" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Для кого -->
+  <section id="audience" class="l-section">
+    <div class="l-shell">
+      <div style="display:flex;flex-direction:column;gap:18px;max-width:640px">
+        <h2 class="l-display l-rise" data-d="1" style="font-size:clamp(32px,4.4vw,60px)">
+          Если это про вас — вы по адресу
+        </h2>
+      </div>
+      <div class="l-grid-2" style="margin-top:clamp(32px,4vw,56px)">
+        {AUD_CASES.map((t, i) => (
+          <div class="l-glass l-tilt l-rise" data-d={String((i % 2) + 1)} style="padding:clamp(26px,2.6vw,36px);display:flex;flex-direction:column;gap:18px">
+            <span class="l-num">0{i + 1}</span>
+            <p style="margin:0;font-family:var(--font-sans);font-size:clamp(16px,1.4vw,18px);line-height:1.55;color:var(--text-body)">{t}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="l-glass l-glass--ink l-glass--keep-ink l-rise l-acc" style="margin-top:20px;padding:clamp(24px,2.4vw,32px)">
+        <button type="button" data-acc="who-not" style="width:100%;border:0;background:none;cursor:pointer;text-align:left;padding:0;display:flex;align-items:center;gap:20px;justify-content:space-between">
+          <span class="l-tag" style="color:var(--gold-light)">Кому я не подхожу</span>
+          <Icon name="plus" size={20} tone="light" class="i-closed" />
+          <Icon name="minus" size={20} tone="light" class="i-open" />
+        </button>
+        <div class="l-open">
+          <div>
+            <p style="margin:20px 0 0;font-family:var(--font-sans);font-size:16px;line-height:1.7;color:var(--text-inverse-muted);max-width:74ch">
+              Крупному бизнесу, которому нужна автоматизация процессов, — это не ко мне. И если компьютер даётся тяжело: для работы с ИИ нужна базовая уверенность — установить программу, зарегистрироваться в сервисе, разобраться с настройками по инструкции.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Обо мне -->
+  <section id="about" class="l-section">
+    <div class="l-shell">
+      <div class="l-split">
+        <div class="l-rise" style="position:relative">
+          <div class="l-stack__tile l-float" style="position:relative;inset:auto;aspect-ratio:4/5">
+            <img src="assets/people/yulia-suit-v2.jpg" alt="Юлия Шабашова" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="l-glass l-glass--sheen l-rise" data-d="2" style="padding:clamp(28px,3.2vw,48px);display:flex;flex-direction:column;gap:26px">
+          <span class="l-tag">Коротко обо мне</span>
+          <h2 class="l-display" style="font-size:clamp(28px,3.4vw,46px)">
+            Перевожу с технического<br />на человеческий
+          </h2>
+          <div style="display:flex;flex-direction:column;gap:0">
+            {FACTS.map((f) => (
+              <div style="display:flex;gap:16px;align-items:flex-start;padding:9px 0">
+                <span style="margin-top:7px;flex:0 0 auto;width:16px;height:1px;background:var(--gold-base)"></span>
+                <span style="font-family:var(--font-sans);font-size:15.5px;line-height:1.6;color:var(--text-body)">{f}</span>
+              </div>
+            ))}
+          </div>
+          <p class="l-display" style="font-size:clamp(22px,2.2vw,30px);line-height:1.18;max-width:26ch">
+            Суперсила — объяснять <span class="l-italic">сложное просто</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="l-rise" style="margin-top:clamp(48px,6vw,88px);display:flex;flex-direction:column;gap:clamp(20px,2.4vw,30px)">
+        <div style="display:flex;align-items:center;gap:20px">
+          <span class="l-tag">Где меня слушали</span>
+        </div>
+
+        <ul class="l-roster">
+          {VENUES.map((v) => <li>{v}</li>)}
+        </ul>
+
+        <div class="l-strip">
+          <div class="l-strip__track">
+            {[...SHOTS, ...SHOTS].map((s) => (
+              <button type="button" class="l-frame" data-full={T + 'full/' + s} aria-label="Открыть фото">
+                <img src={T + s} alt="" loading="lazy" width="214" height="143" />
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="l-lightbox" id="lightbox" role="dialog" aria-modal="true" hidden>
+      <figure class="l-lightbox__frame">
+        <img src="" alt="Фото с выступления" />
+        <button type="button" class="l-lightbox__close" aria-label="Закрыть">
+          <Icon name="close" size={16} tone="ink" />
+        </button>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Результаты -->
+  <section id="results">
+    <div class="l-band">
+      <div class="l-shell">
+        <p class="l-band__q l-rise">
+          ИИ не заменяет вас. Он забирает рутину, а решения <span class="l-italic">остаются вашими</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="l-shell" style="padding-top:clamp(72px,9vw,132px)">
+      <div style="display:flex;align-items:center;gap:20px">
+        <span class="l-tag l-rise">Что меняется после работы со мной</span>
+      </div>
+
+      <div class="l-grid-2" style="margin-top:24px">
+        {RESULTS.map(([big, small, who, detail], i) => (
+          <div class="l-flip l-rise" data-d={String((i % 2) + 1)} data-flipped="false" style="cursor:pointer">
+            <div class="l-flip__inner">
+              <div class="l-flip__face l-flip__face--front"><div class="l-glass" style="height:100%;padding:clamp(26px,2.6vw,36px);display:flex;flex-direction:column;gap:10px">
+                <span class="l-num" style="margin-bottom:6px">0{i + 1}</span>
+                <span class="l-display" style="font-size:clamp(24px,2.5vw,34px);line-height:1.08">{big}</span>
+                <span style="font-family:var(--font-sans);font-size:clamp(14px,1.2vw,16px);color:var(--text-secondary)">{small}</span>
+              </div></div>
+              <div class="l-flip__face l-flip__face--back"><div class="l-glass l-glass--ink" style="height:100%;padding:clamp(26px,2.6vw,36px);display:flex;flex-direction:column;justify-content:space-between;gap:20px">
+                <span class="l-tag" style="color:var(--gold-light)">{who}</span>
+                <p style="margin:0;font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--paper-1)">{detail}</p>
+                <span class="l-tag" style="color:var(--text-inverse-muted)">{big}</span>
+              </div></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Форматы -->
+  <section id="offer" class="l-section">
+    <div class="l-shell">
+      <div style="display:flex;flex-direction:column;gap:18px;max-width:620px">
+        <span class="l-tag l-rise">Форматы</span>
+        <h2 class="l-display l-rise" data-d="1" style="font-size:clamp(32px,4.4vw,60px)">
+          Как со мной работать
+        </h2>
+        <p class="l-lead l-rise" data-d="2" style="max-width:46ch">
+          От шести уроков в Telegram до обучения всей команды. Нажмите на формат — раскроется, что внутри.
+        </p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:clamp(32px,4vw,56px)">
+        {OFFERS.map(([title, price, text, bullets, cta, href, featured, tags], i) => (
+          <div class={'l-glass l-rise l-acc' + (featured ? ' l-glass--gold is-open' : '')} data-d={String((i % 4) + 1)}
+            style={'padding:0' + (featured ? ';background:linear-gradient(135deg,rgba(220,234,241,.58),rgba(255,252,244,.42))' : '')}>
+            <button type="button" data-acc="offer"
+              style="width:100%;border:0;background:none;cursor:pointer;text-align:left;padding:clamp(22px,2.4vw,32px);display:grid;grid-template-columns:1fr auto auto;gap:clamp(16px,2vw,28px);align-items:center">
+              <span style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                <span class="l-display" style="font-size:clamp(21px,2.1vw,30px);line-height:1.1">{title}</span>
+                <span style="font-family:var(--font-sans);font-size:14.5px;line-height:1.5;color:var(--text-muted)">{text}</span>
+                <span style="font-family:var(--font-sans);font-size:12px;letter-spacing:.03em;line-height:1.4;color:var(--text-faint);margin-top:2px">{tags.join(' · ')}</span>
+              </span>
+              <span class="l-display" style="font-size:clamp(18px,1.9vw,26px);color:var(--ink-700);white-space:nowrap">{price}</span>
+              <Icon name="plus" size={20} tone="ink" class="i-closed" />
+              <Icon name="minus" size={20} tone="ink" class="i-open" />
+            </button>
+            <div class="l-open">
+              <div>
+                <div style="padding:0 clamp(22px,2.4vw,32px) clamp(24px,2.4vw,32px);display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between">
+                  <div style="display:flex;flex-direction:column;gap:10px;max-width:52ch">
+                    {bullets.map((b) => (
+                      <span style="display:flex;gap:14px;align-items:flex-start">
+                        <span style="margin-top:8px;width:14px;height:1px;background:var(--gold-base);flex:0 0 auto"></span>
+                        <span style="font-family:var(--font-sans);font-size:15.5px;line-height:1.6;color:var(--text-body)">{b}</span>
+                      </span>
+                    ))}
+                  </div>
+                  <a href={href || '#lead'} class={'sh-btn sh-btn--lg ' + (featured ? 'sh-btn--primary' : 'sh-btn--secondary')} style="border-radius:999px">
+                    {cta} <Icon name="arrow" size={15} tone="current" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Кейсы: тизер -->
+  <section id="cases" class="l-section">
+    <div class="l-shell">
+      <div class="l-glass l-glass--sheen l-rise" style="padding:clamp(30px,3.6vw,56px);display:grid;gap:clamp(24px,3vw,48px)">
+        <div style="display:flex;flex-direction:column;gap:20px;min-width:0">
+          <span class="l-tag">Практика</span>
+          <h2 class="l-display" style="font-size:clamp(28px,3.6vw,48px);max-width:18ch">
+            Не только учу — собираю сама
+          </h2>
+          <p class="l-body" style="color:var(--text-secondary);max-width:54ch">
+            Сайты, Telegram-боты, автоматизацию мелкой рутины. Этот сайт тоже собран с ИИ — вы прямо сейчас смотрите пример. Загляните в кейсы: там видно, что можно сделать под вашу задачу.
+          </p>
+          <a href="cases.html" class="sh-btn sh-btn--primary sh-btn--lg" style="align-self:flex-start;border-radius:999px">
+            Смотреть кейсы <Icon name="arrow" size={16} tone="current" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Reviews />
+
+  <!-- Бесплатно: запись выступления -->
+  <section id="lead" class="l-section">
+    <div class="l-shell">
+      <div class="l-split" style="align-items:stretch">
+        <div class="l-glass l-glass--sheen l-rise" style="padding:clamp(30px,3.4vw,52px);display:flex;flex-direction:column;gap:22px">
+          <div style="display:flex;align-items:center;gap:14px">
+            <Icon name="ray" size={26} strokeWidth={0.9} />
+            <span class="l-tag">Бесплатно</span>
+          </div>
+          <h2 class="l-display" style="font-size:clamp(26px,3.2vw,44px);max-width:20ch">
+            Посмотрите, как это выглядит вживую
+          </h2>
+          <p class="l-body" style="color:var(--text-secondary);max-width:48ch">
+            Запись моего выступления для руководителей в Менеджер-клубе. За час — про то, что ИИ реально меняет в работе руководителя, без магии и без обещаний. Оставьте почту, и я пришлю запись.
+          </p>
+          <div id="lead-sent" hidden style="display:flex;gap:14px;align-items:center;padding:20px 22px;background:rgba(255,252,244,.6);border-radius:18px;border:1px solid rgba(255,255,255,.6)">
+            <Icon name="checkRing" size={24} strokeWidth={0.9} />
+            <span class="l-body">Запись отправлена на почту. Проверьте входящие.</span>
+          </div>
+          <div id="lead-form" style="display:flex;flex-direction:column;gap:18px">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px">
+              <div class="sh-field" style="min-width:0">
+                <label class="sh-field__label" for="lead-name">Имя</label>
+                <div class="sh-control"><input id="lead-name" class="sh-control__input" placeholder="Как вас зовут" /></div>
+              </div>
+              <div class="sh-field" style="min-width:0">
+                <label class="sh-field__label" for="lead-mail">Почта</label>
+                <div class="sh-control"><input id="lead-mail" class="sh-control__input" type="email" placeholder="you@mail.ru" /></div>
+              </div>
+            </div>
+            <div class="l-consents">
+              {CONSENTS.map(([k, label]) => (
+                <label class="sh-check" style="--sh-check-glyph:url('assets/icons/check.svg');--sh-minus-glyph:url('assets/icons/minus.svg')">
+                  <input type="checkbox" name={k} />
+                  <span class="sh-check__box" aria-hidden="true"></span>
+                  <span class="sh-check__text"><span set:html={label} /></span>
+                </label>
+              ))}
+            </div>
+            <button type="button" id="lead-submit" class="sh-btn sh-btn--primary sh-btn--lg" disabled style="align-self:flex-start">
+              Получить запись <Icon name="arrow" size={16} tone="current" />
+            </button>
+            <span style="font-family:var(--font-sans);font-size:13px;line-height:1.55;color:var(--text-faint);max-width:52ch">
+              После записи пришлю пару писем о том, как встроить ИИ в работу. Отписаться можно в один клик.
+            </span>
+          </div>
+        </div>
+
+        <div class="l-rise" data-d="2" style="position:relative;border-radius:26px;overflow:hidden;min-height:380px;border:1px solid rgba(255,255,255,.5)">
+          <img src="assets/people/yulia-tg.jpg" alt="Юлия Шабашова" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:48% 16%" />
+          <span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(77,14,18,0) 0%,rgba(77,14,18,.14) 34%,rgba(77,14,18,.74) 68%,rgba(58,10,14,.93) 100%)"></span>
+          <div style="position:absolute;inset:0;padding:clamp(28px,3.2vw,44px);display:flex;flex-direction:column;justify-content:flex-end;gap:18px">
+            <span class="l-tag" style="color:var(--gold-light)">Телеграм-канал</span>
+            <span class="l-display" style="font-size:clamp(26px,3vw,42px);color:var(--paper-1)">ИИ на спокойном</span>
+            <p style="margin:0;font-family:var(--font-sans);font-size:15.5px;line-height:1.6;color:var(--text-inverse-muted);max-width:38ch">
+              Как использовать ИИ в работе и жизни. Без гонки за новинками и без обещаний, что нейросеть сделает всё за вас.
+            </p>
+            <button type="button" class="sh-btn sh-btn--inverse" style="align-self:flex-start;border-radius:999px">
+              Подписаться <Icon name="arrowUp" size={15} tone="current" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Вопрос — ответ -->
+  <section id="faq" class="l-section">
+    <div class="l-shell">
+      <div class="l-split" style="align-items:start">
+        <div class="l-rise" style="display:flex;flex-direction:column;gap:22px;position:sticky;top:120px">
+          <span class="l-tag">Вопрос — ответ</span>
+          <h2 class="l-display" style="font-size:clamp(30px,3.8vw,52px)">Спросите то, что неудобно</h2>
+          <p class="l-body" style="color:var(--text-secondary);max-width:32ch">Если вашего вопроса здесь нет — напишите в Telegram, отвечаю сама.</p>
+          <a href="#lead" class="sh-btn sh-btn--secondary" style="align-self:flex-start;border-radius:999px">Задать вопрос</a>
+        </div>
+
+        <div style="display:flex;flex-direction:column">
+          {QA.map(([q, a, link], i) => (
+            <div class={'l-glass l-faq-bare l-rise l-acc' + (i === 0 ? ' is-open' : '')} data-d={String((i % 4) + 1)} style="padding:0">
+              <button type="button" data-acc="faq"
+                style="width:100%;border:0;background:none;cursor:pointer;text-align:left;padding:clamp(20px,2.2vw,26px) 2px;display:flex;align-items:center;gap:20px;justify-content:space-between">
+                <span style="font-family:var(--font-sans);font-size:clamp(16px,1.5vw,18px);font-weight:500;letter-spacing:-.008em;color:var(--ink-900)">{q}</span>
+                <Icon name="plus" size={20} tone="ink" class="i-closed" />
+                <Icon name="minus" size={20} tone="ink" class="i-open" />
+              </button>
+              <div class="l-open">
+                <div>
+                  <p style="margin:0;padding:0 40px clamp(22px,2.2vw,28px) 2px;font-family:var(--font-sans);font-size:16px;line-height:1.68;color:var(--text-secondary);max-width:62ch">
+                    {a}{link && <>{' '}<a class="l-underline" href={link} style="text-decoration:none;white-space:nowrap">Смотреть кейсы</a></>}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

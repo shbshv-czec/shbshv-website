@@ -1,0 +1,72 @@
+/* Извлечено из ds-bundle.js — CSS только тех компонентов, которые сайт реально
+   использует: Button, IconButton, Toast, Checkbox, Input. Остальные ~740
+   компонентов дизайн-системы в поставку не попадают. */
+
+/* ── Button ── */
+.sh-btn{--sh-btn-h:var(--control-h-md);position:relative;display:inline-flex;align-items:center;justify-content:center;gap:var(--control-gap);height:var(--sh-btn-h);padding:0 var(--control-pad-x);border:1px solid transparent;border-radius:var(--radius-control);font-family:var(--font-sans);font-size:var(--fs-body-sm);font-weight:var(--fw-medium);letter-spacing:.005em;line-height:1;text-decoration:none;cursor:pointer;white-space:nowrap;transition:var(--transition-control);-webkit-tap-highlight-color:transparent}
+.sh-btn:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
+.sh-btn[disabled],.sh-btn[aria-disabled="true"]{opacity:.36;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.sh-btn--sm{--sh-btn-h:var(--control-h-sm);padding:0 14px;font-size:var(--fs-caption)}
+.sh-btn--lg{--sh-btn-h:var(--control-h-lg);padding:0 28px;font-size:var(--fs-body)}
+.sh-btn--block{display:flex;width:100%}
+
+.sh-btn--primary{background:var(--accent);color:var(--text-on-accent);box-shadow:var(--shadow-1)}
+.sh-btn--primary:hover{background:var(--accent-hover);box-shadow:var(--shadow-2);transform:translateY(var(--lift-hover))}
+.sh-btn--primary:active{background:var(--accent-press);box-shadow:var(--shadow-1);transform:scale(var(--press-scale))}
+
+.sh-btn--secondary{background:transparent;color:var(--text-strong);border-color:var(--border-strong)}
+.sh-btn--secondary:hover{border-color:var(--ink-700);background:var(--accent-quiet)}
+.sh-btn--secondary:active{background:var(--accent-quiet-hover);transform:scale(var(--press-scale))}
+
+.sh-btn--ghost{background:transparent;color:var(--text-secondary)}
+.sh-btn--ghost:hover{background:var(--accent-quiet);color:var(--text-strong)}
+.sh-btn--ghost:active{background:var(--accent-quiet-hover);transform:scale(var(--press-scale))}
+
+.sh-btn--inverse{background:var(--paper-1);color:var(--ink-900)}
+.sh-btn--inverse:hover{background:var(--paper-0);transform:translateY(var(--lift-hover))}
+.sh-btn--inverse:active{background:var(--paper-2);transform:scale(var(--press-scale))}
+
+/* ── IconButton ── */
+.sh-iconbtn{--sh-ib:44px;display:inline-flex;align-items:center;justify-content:center;width:var(--sh-ib);height:var(--sh-ib);padding:0;border:1px solid transparent;border-radius:var(--radius-control);background:transparent;color:var(--text-secondary);cursor:pointer;transition:var(--transition-control)}
+.sh-iconbtn--sm{--sh-ib:34px}
+.sh-iconbtn--round{border-radius:var(--radius-circle)}
+.sh-iconbtn:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
+.sh-iconbtn--ghost:hover{background:var(--accent-quiet);color:var(--text-strong)}
+.sh-iconbtn--ghost:active{background:var(--accent-quiet-hover);transform:scale(var(--press-scale))}
+
+/* ── Toast ── */
+@keyframes sh-toast-in{from{opacity:0;transform:translateY(var(--enter-rise))}to{opacity:1;transform:none}}
+.sh-toast{display:flex;align-items:flex-start;gap:var(--space-4);width:100%;max-width:400px;padding:16px 18px;background:var(--surface-card);border:1px solid var(--border-hairline);border-radius:var(--radius-card);box-shadow:var(--shadow-3);animation:sh-toast-in var(--dur-slow) var(--ease-out-soft)}
+.sh-toast__mark{flex:0 0 auto;width:6px;align-self:stretch;border-radius:3px;background:var(--paper-5)}
+.sh-toast--positive .sh-toast__mark{background:var(--state-positive)}
+.sh-toast__text{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.sh-toast__title{font-size:var(--fs-body-sm);font-weight:var(--fw-semibold);color:var(--text-strong);line-height:1.4}
+.sh-toast__desc{font-size:var(--fs-caption);line-height:var(--lh-caption);color:var(--text-muted)}
+.sh-toast__close{flex:0 0 auto;width:24px;height:24px;margin:-2px -4px 0 0;border:0;background:transparent;color:var(--text-faint);border-radius:50%;cursor:pointer;transition:var(--transition-control)}
+.sh-toast__close:hover{color:var(--text-strong);background:var(--accent-quiet)}
+.sh-toaststack{position:fixed;z-index:70;display:flex;flex-direction:column;gap:12px;pointer-events:none}
+.sh-toaststack>*{pointer-events:auto}
+.sh-toaststack--br{right:var(--space-8);bottom:var(--space-8)}
+
+/* ── Checkbox ── */
+.sh-check{display:inline-flex;align-items:flex-start;gap:12px;cursor:pointer;font-size:var(--fs-body-sm);line-height:1.5;color:var(--text-body)}
+.sh-check input{position:absolute;opacity:0;width:0;height:0}
+.sh-check__box{position:relative;flex:0 0 auto;width:18px;height:18px;margin-top:2px;border:1px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--surface-card);box-shadow:var(--shadow-inset-light);transition:var(--transition-control)}
+.sh-check:hover .sh-check__box{border-color:var(--ink-700)}
+.sh-check__box::after{content:"";position:absolute;inset:0;background:var(--paper-1);opacity:0;transform:scale(.6);transition:opacity var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard);-webkit-mask:var(--sh-check-glyph) center/11px 11px no-repeat;mask:var(--sh-check-glyph) center/11px 11px no-repeat}
+.sh-check input:checked+.sh-check__box{background:var(--accent);border-color:var(--accent)}
+.sh-check input:checked+.sh-check__box::after{opacity:1;transform:scale(1)}
+.sh-check input:focus-visible+.sh-check__box{box-shadow:var(--shadow-focus)}
+.sh-check__text{display:flex;flex-direction:column;gap:2px}
+
+/* ── Input ── */
+.sh-field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.sh-field__label{font-family:var(--font-sans);font-size:var(--fs-label);letter-spacing:var(--ls-label);text-transform:uppercase;font-weight:var(--fw-medium);color:var(--text-muted)}
+.sh-control{--sh-c-h:var(--control-h-md);display:flex;align-items:center;gap:10px;height:var(--sh-c-h);padding:0 14px;background:var(--surface-card);border:1px solid var(--border-soft);border-radius:var(--radius-control);color:var(--text-strong);box-shadow:var(--shadow-inset-light);transition:var(--transition-control)}
+.sh-control:hover{border-color:var(--border-strong)}
+.sh-control:focus-within{border-color:var(--gold-base);box-shadow:var(--shadow-focus)}
+.sh-control__input{flex:1;min-width:0;height:100%;border:0;background:transparent;outline:none;font-family:var(--font-sans);font-size:var(--fs-body-sm);color:var(--text-strong)}
+.sh-control__input::placeholder{color:var(--text-faint)}
+
+/* ── Плейсхолдер изображения (замена image-slot.js) ── */
+.l-imgslot{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;background:var(--paper-2);border:1px dashed var(--border-strong);border-radius:inherit;font-family:var(--font-sans);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint)}

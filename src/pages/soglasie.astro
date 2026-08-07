@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import LegalPage from '../components/LegalPage.astro';
+import doc from '../data/legal-soglasie.mjs';
+---
+<Base
+  title="Согласие на обработку персональных данных — Юлия Шабашова"
+  description="Согласие на обработку персональных данных ИП Шабашова Юлия Валентиновна."
+  ctaHref="index.html#lead"
+>
+  <LegalPage doc={doc} />
+</Base>

@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import LegalPage from '../components/LegalPage.astro';
+import doc from '../data/legal-oferta.mjs';
+---
+<Base
+  title="Договор оферты — Юлия Шабашова"
+  description="Публичная оферта на оказание информационно-консультационных услуг ИП Шабашова Юлия Валентиновна."
+  ctaHref="index.html#lead"
+>
+  <LegalPage doc={doc} />
+</Base>
