@@ -51,6 +51,9 @@
 /* Базовый вид знаков FacetMark (без инлайновых стилей, чтобы их можно было прятать) */
 .fm{display:block;overflow:visible}
 
+/* Кнопки-ссылки не наследуют золотое подчёркивание обычных ссылок (a:hover из base.css) */
+a.sh-btn,a.sh-btn:hover{border-bottom-color:transparent}
+
 /* Сетка «Что ученики уже делают с ИИ»: строго 3×3, карточки меньше обычных */
 .l-grid-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.4vw,18px)}
 @media (max-width:1040px){.l-grid-results{grid-template-columns:repeat(2,minmax(0,1fr))}}

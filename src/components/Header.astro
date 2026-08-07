@@ -31,7 +31,7 @@ const menuExtra: [string, string][] = [['#reviews', 'Отзывы'], ['kursy.htm
           <a href={p + '#' + id}>{label}</a>
         ))}
       </nav>
-      <a href="kursy.html" class="sh-btn sh-btn--ghost sh-btn--sm l-hd__courses">Курсы от 990 ₽</a>
+      <a href="kursy.html" class="sh-btn sh-btn--secondary sh-btn--sm l-hd__courses">Курсы от 990 ₽</a>
       <a href={cta} class="sh-btn sh-btn--primary sh-btn--sm" style="flex:0 0 auto;border-radius:999px">
         <span class="l-hd__cta-full">Смотреть выступление</span><span class="l-hd__cta-short">Выступление</span>
         <Icon name="arrow" size={15} tone="current" />
@@ -64,7 +64,8 @@ const menuExtra: [string, string][] = [['#reviews', 'Отзывы'], ['kursy.htm
   .l-hd__burger[aria-expanded="true"] .i-close{display:block}
   .l-hd__menu{margin-top:8px;padding:8px 22px 14px}
   .l-hd__menu a{display:block;border:0;border-bottom:1px solid rgba(77,14,18,.08);padding:15px 0;text-decoration:none;font-family:var(--font-sans);font-size:16px;font-weight:500;color:var(--text-body)}
-  @media (max-width:1040px){
+  /* Порог с запасом: лого добавило шапке ширины, при 1040 меню уже не влезало */
+  @media (max-width:1140px){
     .l-hd__nav{display:none}
     .l-hd__brand{margin-right:auto}
     .l-hd__burger{display:inline-flex}
