@@ -199,6 +199,52 @@ document.querySelectorAll('[data-video]').forEach((btn) => {
   });
 });
 
+/* ── Табло: буквы перещёлкиваются, как на табло аэропорта, когда строка
+   попадает в кадр (и заново при наведении) ── */
+(() => {
+  const CH = 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯABCDEFGHIKLMNOPRSTUVXYZ0123456789';
+  const flip = (el) => {
+    if (el.dataset.flipping) return;
+    el.dataset.flipping = '1';
+    const chars = (el.dataset.text || el.textContent).split('');
+    el.dataset.text = chars.join('');
+    el.textContent = '';
+    let live = 0;
+    chars.forEach((c, i) => {
+      const s = document.createElement('span');
+      el.appendChild(s);
+      if (!/[А-ЯЁA-Z0-9]/i.test(c)) { s.textContent = c === ' ' ? ' ' : c; s.style.minWidth = '0'; return; }
+      live++;
+      let n = 0;
+      const total = 4 + Math.floor(i * 0.9);
+      const t = setInterval(() => {
+        n++;
+        if (n >= total) { s.textContent = c; clearInterval(t); if (!--live) delete el.dataset.flipping; }
+        else s.textContent = CH[Math.floor(Math.random() * CH.length)];
+      }, 44);
+    });
+    if (!live) delete el.dataset.flipping;
+  };
+  document.querySelectorAll('[data-flip]').forEach((el) => {
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      flip(el);
+    }, { threshold: 0.6 });
+    io.observe(el);
+    el.closest('.l-board__row')?.addEventListener('mouseenter', () => flip(el));
+  });
+})();
+
+/* ── Тихие видео (телефон в телеграм-баннере): играют только в кадре,
+   грузятся лишь когда доскроллили ── */
+document.querySelectorAll('video[data-autoplay]').forEach((v) => {
+  const io = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) { v.play().catch(() => {}); } else { v.pause(); }
+  }, { threshold: 0.35 });
+  io.observe(v);
+});
+
 /* ── Тост ── */
 let toastTimer = 0;
 function showToast(title, desc) {

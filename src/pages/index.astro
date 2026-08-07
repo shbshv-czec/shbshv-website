@@ -20,11 +20,20 @@ const FACTS = [
 ];
 
 const T = 'assets/people/talks/';
-/* Отбор: семь сильных кадров. Отсеяны тёмные, издалека, с перекрытым кадром,
-   дубль группового портрета и кадр на фоне чужого лозунга (14). */
-const SHOTS = ['talk-05.jpg', 'talk-11.jpg', 'talk-03.jpg', 'talk-17.jpg', 'talk-15.jpg', 'talk-07.jpg', 'talk-02.jpg'];
-
-const VENUES = ['Торгово-промышленная палата', 'Менеджер-клуб', 'HR-клуб', 'Дизайн-выходные', 'Ярославский колледж управления', 'Женский синдикат', '«Код легенды»', 'Академия красоты Larey', 'Супертур76', 'Креативный квартал «Фабрика КОРД»'];
+/* Табло «Где меня слушали»: площадка + 1–2 кадра с её выступления.
+   Привязка фото к площадкам — по видимым приметам на кадрах, легко поправить здесь. */
+const VENUES: [string, string[]][] = [
+  ['Торгово-промышленная палата', ['talk-05.jpg']],
+  ['Менеджер-клуб', ['talk-09.jpg']],
+  ['HR-клуб', ['talk-02.jpg']],
+  ['Дизайн-выходные', ['talk-13.jpg']],
+  ['Ярославский колледж управления', ['talk-03.jpg', 'talk-15.jpg']],
+  ['Женский синдикат', ['talk-07.jpg', 'talk-17.jpg']],
+  ['«Код легенды»', ['talk-12.jpg']],
+  ['Академия красоты Larey', ['talk-16.jpg']],
+  ['Супертур76', ['talk-11.jpg']],
+  ['Креативный квартал «Фабрика КОРД»', ['talk-10.jpg']],
+];
 
 /* Лицо: короткий итог + кто. Оборот: кто + полная история. */
 const RESULTS = [
@@ -55,9 +64,9 @@ const OFFERS: [string, string, string, string[], string, string, boolean, string
 ];
 
 const CONSENTS: [string, string][] = [
-  ['oferta', 'Принимаю <a href="oferta.html" target="_blank" rel="noopener">условия оферты</a>'],
+  ['oferta', 'Принимаю <a href="oferta.html" target="_blank" rel="noopener">условия оферты</a> и <a href="privacy.html" target="_blank" rel="noopener">политику конфиденциальности</a>'],
   ['pdn', 'Даю согласие на <a href="soglasie.html" target="_blank" rel="noopener">обработку персональных данных</a>'],
-  ['privacy', 'Принимаю <a href="privacy.html" target="_blank" rel="noopener">Политику конфиденциальности</a>'],
+  ['ads', 'Даю согласие на получение рекламных материалов (отписаться можно в любой момент)'],
 ];
 
 const QA: [string, string, string?][] = [
@@ -93,15 +102,7 @@ const RAIL = [['top', 'Начало'], ['audience', 'Для кого'], ['about'
           <h1 class="l-display l-rise" data-d="1" style="font-size:clamp(44px,6.2vw,92px)">
             Учу бизнес<br />и экспертов<br />работать с ИИ <span class="l-italic">спокойно</span>
           </h1>
-          <p class="l-lead l-rise" data-d="2" style="max-width:42ch">
-            С нуля, по шагам, без гонки за новинками.
-          </p>
-          <div class="l-rise" data-d="3" style="display:flex;gap:12px;flex-wrap:wrap">
-            <a href="#lead" class="sh-btn sh-btn--primary sh-btn--lg" style="border-radius:999px">Смотреть выступление <Icon name="arrow" size={16} tone="current" /></a>
-            <a href="kursy.html" class="sh-btn sh-btn--secondary sh-btn--lg">Курсы от 990 ₽</a>
-          </div>
-
-          <div class="l-glass l-glass--blur l-rise" data-d="4" style="margin-top:10px;padding:22px 26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:22px;border-radius:22px">
+          <div class="l-glass l-glass--blur l-rise" data-d="3" style="padding:22px 26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:22px;border-radius:22px">
             <div style="display:flex;flex-direction:column;gap:6px">
               <span class="l-tag">обучила</span>
               <span class="l-display" style="font-size:30px;line-height:1.12"><span data-count="250" data-suffix="+">250+</span> человек</span>
@@ -114,6 +115,11 @@ const RAIL = [['top', 'Начало'], ['audience', 'Для кого'], ['about'
               <span class="l-tag">выступала для</span>
               <span class="l-display" style="font-size:22px;line-height:1.12">ЯрТПП · Дизайн-выходные</span>
             </div>
+          </div>
+
+          <div class="l-rise" data-d="4" style="margin-top:10px;display:flex;gap:12px;flex-wrap:wrap">
+            <a href="#lead" class="sh-btn sh-btn--primary sh-btn--lg" style="border-radius:999px">Смотреть выступление <Icon name="arrow" size={16} tone="current" /></a>
+            <a href="kursy.html" class="sh-btn sh-btn--secondary sh-btn--lg">Курсы от 990 ₽</a>
           </div>
 
           <div class="l-scrollcue l-rise" data-d="4" style="margin-top:6px"><i></i></div>
@@ -198,18 +204,19 @@ const RAIL = [['top', 'Начало'], ['audience', 'Для кого'], ['about'
           <span class="l-tag">Где меня слушали</span>
         </div>
 
-        <ul class="l-roster">
-          {VENUES.map((v) => <li>{v}</li>)}
-        </ul>
-
-        <div class="l-strip">
-          <div class="l-strip__track">
-            {[...SHOTS, ...SHOTS].map((s) => (
-              <button type="button" class="l-frame" data-full={T + 'full/' + s} aria-label="Открыть фото">
-                <img src={T + s} alt="" loading="lazy" width="214" height="143" />
-              </button>
-            ))}
-          </div>
+        <div class="l-board">
+          {VENUES.map(([venue, photos]) => (
+            <div class="l-board__row">
+              <span class="l-board__text" data-flip>{venue}</span>
+              <span class="l-board__shots">
+                {photos.map((p) => (
+                  <button type="button" class="l-board__shot" data-full={T + 'full/' + p} aria-label={'Фото: ' + venue}>
+                    <img src={T + p} alt="" loading="lazy" />
+                  </button>
+                ))}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -371,7 +378,7 @@ const RAIL = [['top', 'Начало'], ['audience', 'Для кого'], ['about'
           <div style="position:relative;flex:1;border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.6);box-shadow:0 24px 60px -36px rgba(77,14,18,.5);min-height:300px">
             <img src="assets/imagery/webinar.webp" alt="Кадр вебинара: Юлия ведёт онлайн-встречу" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
             <span aria-hidden="true" style="position:absolute;inset:0;background:rgba(48,10,14,.14)"></span>
-            <span class="l-play" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">
+            <span class="l-play" aria-hidden="true" style="position:absolute;left:54%;top:41%;transform:translate(-50%,-50%)">
               <Icon name="play" size={25} tone="light" />
             </span>
           </div>
@@ -384,21 +391,39 @@ const RAIL = [['top', 'Начало'], ['audience', 'Для кого'], ['about'
     </div>
   </section>
 
-  <!-- Телеграм-канал: правки будут позже, пока просто на всю ширину -->
+  <!-- Телеграм-канал: текст и подписка слева, телефон с живым эфиром и QR справа -->
   <section id="tg" class="l-section">
     <div class="l-shell">
-      <div class="l-rise" style="position:relative;border-radius:26px;overflow:hidden;min-height:clamp(360px,42vw,480px);border:1px solid rgba(255,255,255,.5)">
-        <img src="assets/people/yulia-tg.jpg" alt="Юлия Шабашова" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:48% 16%" />
-        <span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(77,14,18,0) 0%,rgba(77,14,18,.14) 34%,rgba(77,14,18,.74) 68%,rgba(58,10,14,.93) 100%)"></span>
-        <div style="position:absolute;inset:0;padding:clamp(28px,3.2vw,44px);display:flex;flex-direction:column;justify-content:flex-end;gap:18px">
-          <span class="l-tag" style="color:var(--gold-light)">Телеграм-канал</span>
-          <span class="l-display" style="font-size:clamp(26px,3vw,42px);color:var(--paper-1)">ИИ на спокойном</span>
-          <p style="margin:0;font-family:var(--font-sans);font-size:15.5px;line-height:1.6;color:var(--text-inverse-muted);max-width:38ch">
-            Как использовать ИИ в работе и жизни. Без гонки за новинками и без обещаний, что нейросеть сделает всё за вас.
-          </p>
-          <button type="button" class="sh-btn sh-btn--inverse" style="align-self:flex-start;border-radius:999px">
-            Подписаться <Icon name="arrowUp" size={15} tone="current" />
-          </button>
+      <div class="l-rise l-tgbanner">
+        <img src="assets/people/yulia-tg.jpg" alt="" aria-hidden="true" loading="lazy" class="l-tgbanner__bg" />
+        <span aria-hidden="true" class="l-tgbanner__scrim"></span>
+        <div class="l-tgbanner__in">
+          <div style="display:flex;flex-direction:column;gap:20px">
+            <span class="l-tag" style="color:var(--gold-light)">Telegram</span>
+            <h2 class="l-display" style="font-size:clamp(30px,3.8vw,54px);color:var(--paper-1);max-width:14ch">
+              ИИ на спокойном — мой личный канал
+            </h2>
+            <p style="margin:0;font-family:var(--font-sans);font-size:15.5px;line-height:1.6;color:var(--text-inverse-muted);max-width:40ch">
+              Как использовать ИИ в работе и жизни. Без гонки за новинками и без обещаний, что нейросеть сделает всё за вас.
+            </p>
+            <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:6px">
+              <a href="https://t.me/shbshv_ai" target="_blank" rel="noopener" class="sh-btn sh-btn--inverse sh-btn--lg" style="border-radius:999px">
+                Подписаться <Icon name="arrowUp" size={15} tone="current" />
+              </a>
+              <a href="https://t.me/shbshv_ai" target="_blank" rel="noopener" style="font-family:var(--font-sans);font-size:14px;letter-spacing:.06em;color:var(--text-inverse-muted);text-decoration:none;border:0">@shbshv_ai</a>
+            </div>
+          </div>
+          <div class="l-tgbanner__media">
+            <div class="l-qr">
+              <img src="assets/imagery/tg-qr.png" alt="QR-код канала @shbshv_ai" loading="lazy" width="112" height="112" />
+              <span>Наведите камеру</span>
+            </div>
+            <div class="l-phone">
+              <video muted loop playsinline preload="none" poster="assets/imagery/telegram-poster.webp" data-autoplay>
+                <source src="assets/imagery/telegram.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
         </div>
       </div>
     </div>
