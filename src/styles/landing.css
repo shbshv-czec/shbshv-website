@@ -11,18 +11,19 @@ body{background:transparent}
   radial-gradient(78% 58% at 84% 5%,rgba(255,251,242,.55) 0%,rgba(255,251,242,0) 60%),
   radial-gradient(120% 92% at 6% 102%,rgba(216,196,172,.20) 0%,rgba(216,196,172,0) 56%)}
 
-/* ── Двухцветный перелив кнопок: тёплый бланш ↔ прохладный платиново-сиреневый.
-   Без радуги. На наведении — те же тона, только ярче (--btn-iris-bright). ── */
+/* ── Продающий градиент кнопок из брендбука: малиново-винный → глубокий вишнёвый
+   (винный в палитре и заявлен как «акцент, кнопки»). Текст — тостовый крем.
+   На наведении — те же тона, только ярче (--btn-iris-bright). ── */
 :root{
-  --btn-iris:linear-gradient(105deg,#F4B3C1 0%,#B4C4F0 100%);
-  --btn-iris-bright:linear-gradient(105deg,#FFBFCE 0%,#C2D3FF 100%)}
+  --btn-iris:linear-gradient(105deg,#93283C 0%,#4D0E12 100%);
+  --btn-iris-bright:linear-gradient(105deg,#AC3049 0%,#611318 100%)}
 @keyframes l-btn-sheen{from{background-position:0% 50%}to{background-position:100% 50%}}
 @keyframes l-btn-glare{0%{transform:translateX(-170%) skewX(-18deg);opacity:0}16%{opacity:1}100%{transform:translateX(330%) skewX(-18deg);opacity:0}}
 
 /* ── Liquid glass ── */
 .l-glass{position:relative;isolation:isolate;overflow:hidden;border-radius:26px;border:1px solid rgba(255,255,255,.6);background:linear-gradient(135deg,rgba(255,252,244,.72) 0%,rgba(255,248,231,.52) 52%,rgba(238,228,218,.58) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.85),inset 0 -1px 0 rgba(255,255,255,.28),0 30px 70px -42px rgba(77,14,18,.42);transition:box-shadow .5s var(--ease-standard),border-color .5s var(--ease-standard),transform .5s var(--ease-standard)}
-/* Матовое стекло: сквозь панель что-то угадывается, но сильно расплывчато */
-.l-glass--blur{background:linear-gradient(135deg,rgba(255,252,244,.86) 0%,rgba(255,248,231,.74) 52%,rgba(238,228,218,.78) 100%);backdrop-filter:blur(28px) saturate(1.15);-webkit-backdrop-filter:blur(28px) saturate(1.15)}
+/* Матовое стекло, как у пилюли-референса: белая заливка ~60%, фон просвечивает сильно размытым */
+.l-glass--blur{background:rgba(255,255,255,.58);backdrop-filter:blur(22px) saturate(1.15);-webkit-backdrop-filter:blur(22px) saturate(1.15)}
 .l-glass::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:soft-light;background:radial-gradient(240px 240px at var(--mx,70%) var(--my,0%),rgba(255,255,255,.95),rgba(255,255,255,0) 72%);opacity:0;transition:opacity .45s var(--ease-standard)}
 .l-glass.is-lit::before,.l-glass:hover::before{opacity:.9}
 .l-glass--sheen::after{content:none}
@@ -194,18 +195,18 @@ body{background:transparent}
 .l-glass--ink .sh-btn--inverse,
 [data-slab="sky"] .l-glass--ink .sh-btn--inverse,
 [data-slab="sky"] .l-glass--keep-ink .sh-btn--inverse{
-  position:relative;overflow:hidden;border:0;color:var(--cherry);
+  position:relative;overflow:hidden;border:0;color:#FFF8E7;
   background:var(--btn-iris);background-size:200% 100%;
   animation:l-btn-sheen 6.5s ease-in-out infinite alternate;
-  box-shadow:0 1px 2px rgba(77,14,18,.08),0 10px 24px -14px rgba(77,14,18,.34),inset 0 1px 0 rgba(255,255,255,.6);
+  box-shadow:0 1px 2px rgba(77,14,18,.14),0 12px 28px -12px rgba(77,14,18,.5),inset 0 1px 0 rgba(255,248,231,.28);
   transition:box-shadow .2s var(--ease-standard),transform .2s var(--ease-standard)}
-/* световой блик — прогоняется по кнопке при наведении */
+/* световой блик — золотистый, прогоняется по кнопке при наведении */
 [data-accent="gold"] .sh-btn--primary::after,
 .l-glass--ink .sh-btn--inverse::after,
 [data-slab="sky"] .l-glass--ink .sh-btn--inverse::after,
 [data-slab="sky"] .l-glass--keep-ink .sh-btn--inverse::after{
   content:"";position:absolute;top:0;bottom:0;left:0;width:44%;pointer-events:none;z-index:1;
-  background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.92) 50%,rgba(255,255,255,0) 100%);
+  background:linear-gradient(100deg,rgba(255,238,208,0) 0%,rgba(255,238,208,.62) 50%,rgba(255,238,208,0) 100%);
   transform:translateX(-170%) skewX(-18deg);opacity:0}
 [data-accent="gold"] .sh-btn--primary > *,
 .l-glass--ink .sh-btn--inverse > *,
@@ -216,7 +217,7 @@ body{background:transparent}
 [data-slab="sky"] .l-glass--keep-ink .sh-btn--inverse:hover{
   background:var(--btn-iris-bright);background-size:200% 100%;
   transform:translateY(var(--lift-hover));
-  box-shadow:0 2px 4px rgba(77,14,18,.1),0 18px 34px -14px rgba(77,14,18,.44),inset 0 1px 0 rgba(255,255,255,.75)}
+  box-shadow:0 2px 4px rgba(77,14,18,.16),0 20px 38px -12px rgba(77,14,18,.55),inset 0 1px 0 rgba(255,248,231,.4)}
 [data-accent="gold"] .sh-btn--primary:hover::after,
 .l-glass--ink .sh-btn--inverse:hover::after,
 [data-slab="sky"] .l-glass--ink .sh-btn--inverse:hover::after,
@@ -249,7 +250,7 @@ body{background:transparent}
   background:linear-gradient(135deg,rgba(193,219,232,.92) 0%,rgba(224,238,245,.78) 46%,rgba(255,252,244,.66) 100%);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 34px 80px -46px rgba(24,60,80,.42)}
 [data-slab="sky"] .l-glass--ink .l-display,[data-slab="sky"] .l-glass--ink h2,[data-slab="sky"] .l-glass--ink h3{color:#3A0A0E}
-[data-slab="sky"] .l-glass--ink .sh-btn--inverse{background:var(--btn-iris);background-size:200% 100%;color:var(--cherry);border:0}
+[data-slab="sky"] .l-glass--ink .sh-btn--inverse{background:var(--btn-iris);background-size:200% 100%;color:#FFF8E7;border:0}
 [data-slab="sky"] .l-glass--ink .l-tag{color:#7A5A20}
 
 /* Плита, которая остаётся винной при data-slab="sky" */
