@@ -97,7 +97,8 @@ a.sh-btn,a.sh-btn:hover{border-bottom-color:transparent}
   /* Баннер чуть выше кадра, фото прижато к низу: взгляд опускается к верхней
      четверти телефона, ступни не режутся, верхняя полоска доливается цветом стены */
   .l-tgbanner{aspect-ratio:1400/900}
-  .l-tgbanner__bg{height:auto;top:auto;bottom:0}
+  /* Фото сдвинуто ниже кадра: туфли скрыты, локоть ложится на QR */
+  .l-tgbanner__bg{height:auto;top:auto;bottom:-12%}
   .l-tgbanner__in{height:100%;align-items:center}
   .l-tgbanner__in > :first-child{align-self:start;padding-top:clamp(14px,1.8vw,30px)}
 }
