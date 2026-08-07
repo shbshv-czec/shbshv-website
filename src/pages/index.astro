@@ -26,11 +26,17 @@ const SHOTS = ['talk-05.jpg', 'talk-11.jpg', 'talk-03.jpg', 'talk-17.jpg', 'talk
 
 const VENUES = ['Торгово-промышленная палата', 'Менеджер-клуб', 'HR-клуб', 'Дизайн-выходные', 'Ярославский колледж управления', 'Женский синдикат', '«Код легенды»', 'Академия красоты Larey', 'Супертур76', 'Креативный квартал «Фабрика КОРД»'];
 
+/* Лицо: короткий итог + кто. Оборот: кто + полная история. */
 const RESULTS = [
-  ['Регламент', 'из одного созвона', 'руководитель проекта', 'Расшифровку полуторачасового совещания ИИ собрал в готовый регламент и презентацию к нему. Руководителю осталось причесать.'],
-  ['Анализ рынка', 'своими силами', 'сфера гостеприимства', 'Цены конкурентов, тренды, позиционирование. То, ради чего обычно зовут подрядчика, теперь собирается самостоятельно и быстро.'],
-  ['Инструкции для команды', 'за вечер', 'сфера гостеприимства', 'Чек-листы для администраторов на острые ситуации и правила для персонала. То, до чего долго не доходили руки.'],
-  ['От опаски', 'к работе каждый день', 'была новичком', 'Начинала с нуля и с осторожностью. Теперь общается с ИИ каждый день, а качество запросов выросло в разы.'],
+  ['Регламент из созвона', 'час вместо нескольких', 'руководитель проекта', 'Из расшифровки часового созвона собрал регламент и презентацию. Час работы вместо нескольких.'],
+  ['Черновик отчёта', '20 минут вместо 3 часов', 'менеджер', 'Черновик отчёта за 20 минут вместо 3 часов.'],
+  ['Контент-план на месяц', 'за один заход', 'маркетолог', 'Контент-план на месяц за один заход.'],
+  ['Проверка фактов', 'минуты вместо часов', 'контент-мейкер', 'Проверка достоверности фактов за минуты вместо часов.'],
+  ['Визуал карточек', '8 000 вместо десятков тысяч', 'интернет-магазин', 'Визуал карточек за 8 000 вместо десятков тысяч.'],
+  ['Фото и макеты сам', 'без правок с подрядчиками', 'предприниматель', 'Фото для каталога и макеты по брендбуку сам, без правок с подрядчиками.'],
+  ['Анализ конкурентов', 'своими силами', 'специалист в гостеприимстве', 'Собрал анализ конкурентов: цены, тренды, позиционирование.'],
+  ['Чек-листы для персонала', 'за вечер', 'администратор', 'За вечер написал чек-листы для персонала и правила для команды.'],
+  ['Визуал карточек товара', 'без съёмки', 'менеджер маркетплейса', 'Визуал карточек товара сам, без съёмки.'],
 ];
 
 const OFFERS: [string, string, string, string[], string, string, boolean, string[]][] = [
@@ -233,21 +239,21 @@ const RAIL = [['top', 'Начало'], ['audience', 'Для кого'], ['about'
 
     <div class="l-shell" style="padding-top:clamp(72px,9vw,132px)">
       <div style="display:flex;align-items:center;gap:20px">
-        <span class="l-tag l-rise">Что меняется после работы со мной</span>
+        <span class="l-tag l-rise">Что ученики уже делают с ИИ</span>
       </div>
 
-      <div class="l-grid-2" style="margin-top:24px">
+      <div class="l-grid-results" style="margin-top:24px">
         {RESULTS.map(([big, small, who, detail], i) => (
-          <div class="l-flip l-rise" data-d={String((i % 2) + 1)} data-flipped="false" style="cursor:pointer">
+          <div class="l-flip l-rise" data-d={String((i % 3) + 1)} data-flipped="false" style="cursor:pointer">
             <div class="l-flip__inner">
-              <div class="l-flip__face l-flip__face--front"><div class="l-glass" style="height:100%;padding:clamp(26px,2.6vw,36px);display:flex;flex-direction:column;gap:10px">
-                <span class="l-num" style="margin-bottom:6px">0{i + 1}</span>
-                <span class="l-display" style="font-size:clamp(24px,2.5vw,34px);line-height:1.08">{big}</span>
-                <span style="font-family:var(--font-sans);font-size:clamp(14px,1.2vw,16px);color:var(--text-secondary)">{small}</span>
+              <div class="l-flip__face l-flip__face--front"><div class="l-glass" style="height:100%;min-height:172px;padding:clamp(20px,2vw,28px);display:flex;flex-direction:column;gap:8px">
+                <span class="l-num" style="margin-bottom:4px">0{i + 1}</span>
+                <span class="l-display" style="font-size:clamp(20px,1.9vw,26px);line-height:1.1">{big}</span>
+                <span style="font-family:var(--font-sans);font-size:clamp(13px,1.1vw,14.5px);color:var(--text-secondary)">{small}</span>
               </div></div>
-              <div class="l-flip__face l-flip__face--back"><div class="l-glass l-glass--ink" style="height:100%;padding:clamp(26px,2.6vw,36px);display:flex;flex-direction:column;justify-content:space-between;gap:20px">
+              <div class="l-flip__face l-flip__face--back"><div class="l-glass l-glass--ink" style="height:100%;padding:clamp(20px,2vw,28px);display:flex;flex-direction:column;justify-content:space-between;gap:14px">
                 <span class="l-tag" style="color:var(--gold-light)">{who}</span>
-                <p style="margin:0;font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--paper-1)">{detail}</p>
+                <p style="margin:0;font-family:var(--font-sans);font-size:14px;line-height:1.55;color:var(--paper-1)">{detail}</p>
                 <span class="l-tag" style="color:var(--text-inverse-muted)">{big}</span>
               </div></div>
             </div>

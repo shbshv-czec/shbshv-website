@@ -51,6 +51,11 @@
 /* Базовый вид знаков FacetMark (без инлайновых стилей, чтобы их можно было прятать) */
 .fm{display:block;overflow:visible}
 
+/* Сетка «Что ученики уже делают с ИИ»: строго 3×3, карточки меньше обычных */
+.l-grid-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.4vw,18px)}
+@media (max-width:1040px){.l-grid-results{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.l-grid-results{grid-template-columns:minmax(0,1fr)}}
+
 /* Якоря учитывают фиксированную шапку (заменяет JS-скролл со смещением) */
 [id]{scroll-margin-top:110px}
 
