@@ -57,7 +57,7 @@ const OFFERS: [string, string, string, string[], string, string, boolean, string
 const CONSENTS: [string, string][] = [
   ['oferta', 'Принимаю <a href="oferta.html" target="_blank" rel="noopener">условия оферты</a>'],
   ['pdn', 'Даю согласие на <a href="soglasie.html" target="_blank" rel="noopener">обработку персональных данных</a>'],
-  ['privacy', 'Согласна с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>'],
+  ['privacy', 'Принимаю <a href="privacy.html" target="_blank" rel="noopener">Политику конфиденциальности</a>'],
 ];
 
 const QA: [string, string, string?][] = [
@@ -331,14 +331,14 @@ const RAIL = [['top', 'Начало'], ['audience', 'Для кого'], ['about'
   <section id="lead" class="l-section">
     <div class="l-shell">
       <div class="l-glass l-glass--sheen l-rise" style="padding:clamp(30px,3.4vw,52px)">
-        <div class="l-split" style="align-items:center">
+        <div class="l-split" style="align-items:stretch">
         <div style="display:flex;flex-direction:column;gap:22px">
           <span class="l-tag">Бесплатно</span>
-          <h2 class="l-display" style="font-size:clamp(26px,3.2vw,44px);max-width:20ch">
-            Посмотрите, как это выглядит вживую
+          <h2 class="l-display" style="font-size:clamp(26px,3.2vw,44px);max-width:22ch">
+            Посмотрите вебинар «ИИ в работе руководителя»
           </h2>
           <p class="l-body" style="color:var(--text-secondary);max-width:48ch">
-            Запись моего выступления для руководителей в Менеджер-клубе. За час — про то, что ИИ реально меняет в работе руководителя, без магии и без обещаний. Оставьте почту, и я пришлю запись.
+            Запись моего выступления в Менеджер-клубе. За час показываю, как ИИ реально меняет работу руководителя. Оставьте почту, и я пришлю запись.
           </p>
           <div id="lead-sent" hidden style="display:flex;gap:14px;align-items:center;padding:20px 22px;background:rgba(255,252,244,.6);border-radius:18px;border:1px solid rgba(255,255,255,.6)">
             <span class="l-body">Запись отправлена на почту. Проверьте входящие.</span>
@@ -366,14 +366,20 @@ const RAIL = [['top', 'Начало'], ['audience', 'Для кого'], ['about'
             <button type="button" id="lead-submit" class="sh-btn sh-btn--primary sh-btn--lg" disabled style="align-self:flex-start">
               Получить запись <Icon name="arrow" size={16} tone="current" />
             </button>
-            <span style="font-family:var(--font-sans);font-size:13px;line-height:1.55;color:var(--text-faint);max-width:52ch">
-              После записи пришлю пару писем о том, как встроить ИИ в работу. Отписаться можно в один клик.
-            </span>
           </div>
         </div>
 
-        <div class="l-rise" data-d="2" style="position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.6);box-shadow:0 24px 60px -36px rgba(77,14,18,.5)">
-          <img src="assets/imagery/webinar.webp" alt="Кадр вебинара: Юлия ведёт онлайн-встречу" loading="lazy" style="display:block;width:100%;height:auto" />
+        <div class="l-rise" data-d="2" style="display:flex;flex-direction:column;gap:10px">
+          <div style="position:relative;flex:1;border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.6);box-shadow:0 24px 60px -36px rgba(77,14,18,.5);min-height:300px">
+            <img src="assets/imagery/webinar.webp" alt="Кадр вебинара: Юлия ведёт онлайн-встречу" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+            <span aria-hidden="true" style="position:absolute;inset:0;background:rgba(48,10,14,.14)"></span>
+            <span class="l-play" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">
+              <Icon name="play" size={25} tone="light" />
+            </span>
+          </div>
+          <span style="font-family:var(--font-sans);font-size:12.5px;line-height:1.5;color:var(--text-faint);text-align:center">
+            Закрытый вебинар «ИИ в работе руководителя» доступен сразу после подписки
+          </span>
         </div>
         </div>
       </div>

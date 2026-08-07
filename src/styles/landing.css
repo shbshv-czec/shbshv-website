@@ -335,10 +335,10 @@ body{background:transparent}
 /* Кнопки реагируют мгновенно — никакой инерции на наведении */
 .sh-btn,.sh-btn--secondary,.sh-btn--ghost,.sh-btn--inverse,.l-cookies__ok{transition:background 90ms linear,background-color 90ms linear,border-color 90ms linear,color 90ms linear,box-shadow 120ms linear,transform 120ms linear!important}
 
-/* Согласия: мелко и тихо, чтобы не спорить с главным */
-.l-consents{display:flex;flex-direction:column;gap:9px}
-.l-consents .sh-check{font-size:12.5px;line-height:1.45;color:var(--text-muted);gap:10px;align-items:flex-start}
-.l-consents .sh-check__box{width:15px;height:15px;margin-top:1px;border-radius:4px}
+/* Согласия: совсем мелко и плотно, чтобы не спорить с главным */
+.l-consents{display:flex;flex-direction:column;gap:4px}
+.l-consents .sh-check{font-size:11px;line-height:1.4;color:var(--text-muted);gap:8px;align-items:flex-start}
+.l-consents .sh-check__box{width:13px;height:13px;margin-top:1px;border-radius:3.5px}
 .l-consents .sh-check a{color:var(--text-secondary);text-decoration:none;border-bottom:1px solid rgba(77,14,18,.28)}
 .l-consents .sh-check a:hover{color:var(--cherry);border-color:var(--cherry)}
 
