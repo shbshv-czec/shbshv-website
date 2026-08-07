@@ -172,12 +172,14 @@ document.querySelectorAll('.l-flip').forEach((card) => {
   window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !box.hidden) close(); });
 })();
 
-/* ── Отзывы: показать ещё ── */
+/* ── Отзывы: показать ещё. Скрытые появляются отдельным блоком ниже,
+   первые семь остаются на своих местах ── */
 (() => {
   const btn = document.getElementById('reviews-more');
-  if (!btn) return;
+  const extra = document.getElementById('reviews-extra');
+  if (!btn || !extra) return;
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.l-quote[hidden]').forEach((q) => { q.hidden = false; q.classList.add('is-in'); });
+    extra.hidden = false;
     btn.closest('div').hidden = true;
   });
 })();

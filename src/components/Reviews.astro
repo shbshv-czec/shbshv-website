@@ -59,9 +59,27 @@ const visible = 7;
       </div>
     </div>
 
+    <!-- Первые семь — в своём masonry-блоке: при раскрытии они не двигаются,
+         скрытые появляются отдельным блоком ниже -->
     <div class="l-cols" style="margin-top:20px">
-      {list.map(([name, kind, text, photo], i) => (
-        <figure class={'l-glass l-quote' + (i < visible ? ' l-rise' : '')} data-d={String((i % 4) + 1)} hidden={i >= visible}
+      {list.slice(0, visible).map(([name, kind, text, photo], i) => (
+        <figure class="l-glass l-quote l-rise" data-d={String((i % 4) + 1)}
+          style="padding:clamp(24px,2.2vw,32px);margin:0 0 20px;display:flex;flex-direction:column;gap:16px">
+          <blockquote style="margin:0;font-family:var(--font-sans);font-size:15.5px;line-height:1.62;color:var(--text-body)">{text}</blockquote>
+          <figcaption style="display:flex;align-items:center;gap:14px;padding-top:4px">
+            <span class="l-avatar"><img src={P + photo} alt={name} loading="lazy" onerror="this.parentNode.style.display='none'" /></span>
+            <span style="display:flex;flex-direction:column;gap:2px;min-width:0">
+              <span class="l-display" style="font-size:17px;line-height:1.2">{name}</span>
+              {kind === 'org' && <span class="l-tag" style="font-size:10px">организация</span>}
+            </span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <div class="l-cols" id="reviews-extra" hidden>
+      {list.slice(visible).map(([name, kind, text, photo]) => (
+        <figure class="l-glass l-quote"
           style="padding:clamp(24px,2.2vw,32px);margin:0 0 20px;display:flex;flex-direction:column;gap:16px">
           <blockquote style="margin:0;font-family:var(--font-sans);font-size:15.5px;line-height:1.62;color:var(--text-body)">{text}</blockquote>
           <figcaption style="display:flex;align-items:center;gap:14px;padding-top:4px">
