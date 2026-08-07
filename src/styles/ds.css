@@ -8,7 +8,6 @@
 .sh-btn[disabled],.sh-btn[aria-disabled="true"]{opacity:.36;cursor:not-allowed;transform:none!important;box-shadow:none!important}
 .sh-btn--sm{--sh-btn-h:var(--control-h-sm);padding:0 14px;font-size:var(--fs-caption)}
 .sh-btn--lg{--sh-btn-h:var(--control-h-lg);padding:0 28px;font-size:var(--fs-body)}
-.sh-btn--block{display:flex;width:100%}
 
 .sh-btn--primary{background:var(--accent);color:var(--text-on-accent);box-shadow:var(--shadow-1)}
 .sh-btn--primary:hover{background:var(--accent-hover);box-shadow:var(--shadow-2);transform:translateY(var(--lift-hover))}

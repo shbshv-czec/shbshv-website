@@ -31,9 +31,6 @@ body{background:transparent}
 .l-glass--gold::after{content:none}
 .l-glass--ink{border-color:rgba(255,248,231,.20);background:linear-gradient(135deg,rgba(77,14,18,.80) 0%,rgba(100,49,62,.66) 100%);box-shadow:inset 0 1px 0 rgba(255,248,231,.22),0 34px 80px -44px rgba(77,14,18,.6);color:var(--text-inverse-muted)}
 .l-glass--ink .l-display,.l-glass--ink h2,.l-glass--ink h3{color:var(--paper-1)}
-.l-glass--cold{background:linear-gradient(135deg,rgba(220,234,241,.62) 0%,rgba(255,252,244,.42) 100%)}
-.l-glass--quiet{background:linear-gradient(135deg,rgba(255,252,244,.42) 0%,rgba(216,196,172,.24) 100%)}
-.l-glass--dashed{border-style:dashed;border-color:rgba(77,14,18,.18);box-shadow:none}
 @keyframes l-shimmer{to{background-position:220% 50%}}
 
 /* ── Тактильность: наклон под курсором ── */
@@ -75,26 +72,15 @@ body{background:transparent}
 .l-flip__face--back{position:absolute;inset:0;transform:rotateY(180deg);opacity:0;visibility:hidden}
 .l-flip:hover .l-flip__face--front,.l-flip[data-flipped="true"] .l-flip__face--front{opacity:0;visibility:hidden;transition:opacity .35s var(--ease-standard),visibility .35s step-end}
 .l-flip:hover .l-flip__face--back,.l-flip[data-flipped="true"] .l-flip__face--back{opacity:1;visibility:visible;transition:opacity .55s var(--ease-standard) .18s,visibility 0s}
-.l-flip__pane{position:absolute;inset:0}
 
 /* ── Раскрытие (аккордеон на grid-rows) ── */
 .l-open{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease-standard)}
 .l-open.is-open{grid-template-rows:1fr}
 .l-open>div{overflow:hidden}
 
-/* ── Бегущая строка ── */
-.l-marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-.l-marquee__track{display:flex;gap:14px;width:max-content;animation:l-scroll 46s linear infinite}
-.l-marquee--rev .l-marquee__track{animation-direction:reverse;animation-duration:58s}
-.l-marquee:hover .l-marquee__track{animation-play-state:paused}
-@keyframes l-scroll{to{transform:translateX(-50%)}}
-.l-chip{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.6);background:rgba(255,252,244,.62);font-family:var(--font-sans);font-size:14px;font-weight:500;color:var(--text-body);white-space:nowrap}
-
 /* ── Кладка отзывов ── */
 .l-avatar{flex:0 0 auto;width:46px;height:46px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px rgba(194,154,84,.55),0 0 0 4px rgba(255,252,244,.7)}
 .l-avatar img{width:100%;height:100%;object-fit:cover;display:block}
-.l-avatar--logo{background:var(--paper-0);display:flex;align-items:center;justify-content:center}
-.l-avatar--logo img{object-fit:contain;padding:5px}
 .l-cols{column-count:3;column-gap:20px}
 .l-quote{break-inside:avoid;-webkit-column-break-inside:avoid;display:inline-flex!important;width:100%}
 @media (max-width:1040px){.l-cols{column-count:2}}
@@ -120,28 +106,13 @@ body{background:transparent}
   .l-rail{display:none}
 }
 @media (prefers-reduced-motion:reduce){
-  .l-marquee__track,.l-float,.l-glass--sheen::after,.l-scrollcue i{animation:none!important}
+  .l-float,.l-glass--sheen::after,.l-scrollcue i{animation:none!important}
   .l-rise{opacity:1;transform:none;transition:none}
   .l-tilt{transform:none}
 }
 
-.l-vgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);gap:clamp(16px,1.6vw,24px);align-items:stretch}
 .l-vstage{position:relative;border-radius:26px;overflow:hidden;aspect-ratio:3/4;border:1px solid rgba(255,255,255,.55);background:var(--ink-900);isolation:isolate}
-.l-vlist{display:grid;grid-template-rows:repeat(4,1fr);gap:clamp(10px,1vw,14px)}
-.l-vcard{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:16px;padding:12px 18px 12px 12px;cursor:pointer;text-align:left}
-.l-vcard__ph{width:64px;height:82px;flex:0 0 64px;border-radius:14px;overflow:hidden;background:var(--paper-2);box-shadow:0 1px 0 rgba(255,255,255,.6) inset}
-.l-vcard__ph img{width:100%;height:100%;object-fit:cover;display:block}
-@media (max-width:880px){.l-vgrid{grid-template-columns:1fr}.l-vlist{grid-template-rows:none}}
 
-.l-shot{flex:0 0 auto;padding:0;cursor:pointer;width:96px;height:66px;border-radius:13px;overflow:hidden;border:1px solid rgba(255,255,255,.6);box-shadow:0 6px 18px -10px rgba(77,14,18,.42),0 1px 0 rgba(255,255,255,.7) inset;background:var(--paper-2)}
-.l-shot img{width:100%;height:100%;object-fit:cover;display:block}
-.l-shot[data-tilt="a"]{transform:rotate(-2.2deg)}
-.l-shot[data-tilt="b"]{transform:rotate(2.6deg)}
-
-.l-casemini{display:grid;grid-template-columns:repeat(2,72px);gap:12px}
-.l-casemini__cell{display:flex;align-items:center;justify-content:center;height:72px;border-radius:20px}
-.l-casemini__cell[data-i="1"]{transform:translateY(14px)}
-.l-casemini__cell[data-i="2"]{transform:translateY(-14px)}
 .l-casecard{display:flex;flex-direction:column;gap:12px;padding:0 0 clamp(24px,2.6vw,34px);text-decoration:none;overflow:hidden;transition:transform .5s var(--ease-standard),border-color .4s var(--ease-standard)}
 .l-casecard > :not(.l-casecard__cover){margin-inline:clamp(24px,2.6vw,34px)}
 .l-casecard__cover{display:block;aspect-ratio:3/2;overflow:hidden;background:var(--paper-2);border-bottom:1px solid rgba(255,255,255,.5);margin-bottom:clamp(18px,2vw,24px)}
@@ -149,9 +120,7 @@ body{background:transparent}
 .l-casecard:hover .l-casecard__cover img{transform:scale(1.03)}
 .l-casecard:hover{transform:translateY(-4px);border-color:var(--border-gold)}
 .l-casecard__go{display:flex;align-items:center;gap:10px;margin-top:6px;color:var(--text-secondary)}
-@media (max-width:720px){.l-casemini{display:none}}
 
-.l-shot:hover{border-color:var(--border-gold)}
 .l-lightbox{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(48,10,14,.42);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);animation:l-fade .32s var(--ease-standard)}
 .l-lightbox__frame{position:relative;margin:0;border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.6);box-shadow:0 40px 90px -40px rgba(48,10,14,.7);animation:l-pop .38s var(--ease-standard)}
 .l-lightbox__frame img{display:block;max-width:min(620px,92vw);max-height:82vh;width:auto;height:auto}
@@ -183,7 +152,6 @@ body{background:transparent}
 .l-price-was{position:relative;font-family:var(--font-sans);font-size:16px;color:var(--text-muted)}
 .l-price-was::after{content:'';position:absolute;left:-2px;right:-2px;top:50%;height:1px;background:currentColor;opacity:.7}
 .l-price-now{font-family:var(--font-display);font-size:clamp(34px,4vw,54px);line-height:1;color:var(--ink-900)}
-
 
 .l-casecard.is-soon{opacity:.62}
 .l-casecard.is-soon:hover{transform:none;border-color:rgba(255,255,255,.55)}
@@ -263,22 +231,12 @@ body{background:transparent}
 [data-slab="sky"] .l-glass--keep-ink .l-display,[data-slab="sky"] .l-glass--keep-ink h2,[data-slab="sky"] .l-glass--keep-ink h3{color:#FFF8E7}
 [data-slab="sky"] .l-glass--keep-ink .l-tag{color:#E3C88C}
 
-/* Микротег формата */
-.l-pill{display:inline-flex;align-items:center;padding:4px 11px;border-radius:999px;border:1px solid var(--border-cold);background:rgba(193,219,232,.24);font-family:var(--font-sans);font-size:11.5px;line-height:1.3;letter-spacing:.02em;color:var(--text-secondary);white-space:nowrap}
-
-/* Галерея выступлений: снять муть, поднять свет */
-.l-shot img,.l-lightbox__frame img{filter:brightness(1.11) contrast(1.05) saturate(.94)}
-.l-shot::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,252,244,.16),rgba(255,252,244,.04));mix-blend-mode:soft-light}
-.l-shot{position:relative}
+/* Лайтбокс: снять муть, поднять свет */
+.l-lightbox__frame img{filter:brightness(1.11) contrast(1.05) saturate(.94)}
 
 /* Поля ввода: фокус кромкой, без второй рамки */
 .l-shell .sh-control:focus-within{border-color:var(--sky-deep);box-shadow:var(--shadow-inset-light),0 6px 18px -12px rgba(60,110,134,.45)}
 
-/* Соцсети в подвале */
-.l-social{display:flex;gap:10px}
-.l-social a{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,248,231,.22);background:rgba(255,248,231,.06);transition:background .3s var(--ease-standard),border-color .3s var(--ease-standard),transform .3s var(--ease-standard)}
-.l-social a:hover{background:rgba(255,248,231,.14);border-color:var(--gold-light);transform:translateY(-2px)}
-.l-social img{width:17px;height:17px;display:block;opacity:.86}
 .l-docs{display:flex;flex-wrap:wrap;gap:6px 18px}
 .l-docs a{font-family:var(--font-sans);font-size:13px;line-height:1.6;color:var(--text-inverse-muted);text-decoration:none;border-bottom:1px solid rgba(255,248,231,.22);padding-bottom:1px}
 .l-docs a:hover{color:var(--paper-1);border-color:var(--gold-light)}
@@ -298,39 +256,25 @@ body{background:transparent}
 /* ── Радиусы (air.inc): поля 4 · кнопки 8 · изображения 11 · карточки 12 ── */
 .l-shell .sh-btn,.l-glass--ink .sh-btn{border-radius:8px !important}
 .l-shell .sh-control{border-radius:4px}
-.l-glass,.l-quote,.l-casecard,.l-legal,.l-legal-nav,.l-vcard,.l-casemini__cell{border-radius:12px !important}
-.l-stack__tile,.l-vstage,.l-lightbox__frame,.l-shot,.l-vcard__ph{border-radius:11px !important}
-.l-chip,.l-pill,.l-social a,.l-avatar,.l-lightbox__close,.sh-btn--round{border-radius:999px !important}
-.l-header-pill{border-radius:12px !important}
+.l-glass,.l-quote,.l-casecard,.l-legal,.l-legal-nav{border-radius:12px !important}
+.l-stack__tile,.l-vstage,.l-lightbox__frame{border-radius:11px !important}
+.l-avatar,.l-lightbox__close{border-radius:999px !important}
 
 .l-contact{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:14px;text-decoration:none;border:0}
 .l-contact__ic{width:38px;height:38px;border-radius:999px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,248,231,.22);background:rgba(255,248,231,.06);transition:background .3s var(--ease-standard),border-color .3s var(--ease-standard)}
 .l-contact__ic img{width:16px;height:16px;display:block;opacity:.88}
 .l-contact:hover .l-contact__ic{background:rgba(255,248,231,.14);border-color:var(--gold-light)}
 
-/* ── Где меня слушали: ростер + спокойная лента кадров ── */
-.l-roster{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));column-gap:clamp(32px,4.5vw,88px);row-gap:clamp(14px,1.5vw,20px)}
-.l-roster li{font-family:var(--font-display);font-size:clamp(18px,1.6vw,22px);line-height:1.34;color:var(--ink-800);opacity:.86}
-.l-strip{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}
-.l-strip__track{display:flex;gap:16px;width:max-content;animation:l-scroll 66s linear infinite}
-.l-strip:hover .l-strip__track{animation-play-state:paused}
-.l-frame{flex:0 0 auto;width:214px;height:143px;padding:0;border:1px solid rgba(255,255,255,.7);border-radius:11px;overflow:hidden;cursor:pointer;background:var(--paper-2);box-shadow:0 10px 26px -18px rgba(77,14,18,.42);transition:border-color .45s var(--ease-standard),box-shadow .45s var(--ease-standard)}
-.l-frame img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.86) brightness(1.04) contrast(1.03)}
-.l-frame:hover{border-color:var(--border-gold);box-shadow:0 14px 30px -18px rgba(77,14,18,.5)}
-@media (prefers-reduced-motion:reduce){.l-strip__track{animation:none}}
-@media (max-width:640px){.l-frame{width:164px;height:110px}}
-
-/* ── Уведомление о cookies ── */
-.l-cookies{position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;align-items:center;justify-content:center;gap:clamp(14px,2vw,28px);padding:14px clamp(52px,5vw,72px) 14px clamp(18px,4vw,40px);background:rgba(255,252,244,.82);backdrop-filter:blur(22px) saturate(1.2);-webkit-backdrop-filter:blur(22px) saturate(1.2);border-top:1px solid rgba(255,255,255,.7);box-shadow:0 -12px 40px -28px rgba(77,14,18,.4);animation:l-cookies-in .5s var(--ease-out-soft) both}
-@keyframes l-cookies-in{from{transform:translateY(100%)}to{transform:none}}
-.l-cookies p{margin:0;font-family:var(--font-sans);font-size:13.5px;line-height:1.5;color:var(--text-body);max-width:96ch;text-wrap:pretty}
-.l-cookies a{color:var(--cherry);text-decoration:none;border-bottom:1px solid var(--gold-base);padding-bottom:1px}
-.l-cookies a:hover{border-color:var(--cherry)}
-.l-cookies__ok{flex:0 0 auto;border:0;border-radius:8px;padding:9px 20px;cursor:pointer;background:#FFFFFF;color:var(--cherry);font-family:var(--font-sans);font-size:13.5px;font-weight:var(--fw-medium);box-shadow:0 1px 2px rgba(77,14,18,.06),0 8px 20px -14px rgba(77,14,18,.28);transition:box-shadow .35s var(--ease-standard),transform .35s var(--ease-standard)}
-.l-cookies__ok:hover{transform:translateY(-1px);box-shadow:0 1px 2px rgba(77,14,18,.07),0 14px 26px -14px rgba(77,14,18,.34)}
-.l-cookies__x{position:absolute;right:clamp(14px,2vw,24px);top:50%;transform:translateY(-50%);width:30px;height:30px;border:0;border-radius:999px;background:none;cursor:pointer;font-size:20px;line-height:1;color:var(--text-muted);transition:background .3s var(--ease-standard),color .3s var(--ease-standard)}
-.l-cookies__x:hover{background:rgba(77,14,18,.06);color:var(--cherry)}
-@media (max-width:720px){.l-cookies{flex-direction:column;align-items:flex-start;padding:16px 52px 16px 18px}}
+/* ── Уведомление о cookies: маленькая пилюля по центру, минимализм ── */
+.l-cookies{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:70;display:flex;align-items:center;gap:16px;max-width:calc(100vw - 32px);padding:8px 9px 8px 20px;background:rgba(255,255,255,.92);backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);border:1px solid rgba(255,255,255,.75);border-radius:999px;box-shadow:0 18px 44px -22px rgba(77,14,18,.35);animation:l-cookies-in .5s var(--ease-out-soft) both}
+@keyframes l-cookies-in{from{opacity:0;transform:translate(-50%,14px)}to{opacity:1;transform:translate(-50%,0)}}
+.l-cookies p{margin:0;font-family:var(--font-sans);font-size:13px;line-height:1.45;color:var(--text-body);white-space:nowrap}
+.l-cookies a{flex:0 0 auto;font-family:var(--font-sans);font-size:13px;color:var(--text-secondary);text-decoration:none;border-bottom:1px solid rgba(77,14,18,.25);padding-bottom:1px}
+.l-cookies a:hover{color:var(--cherry);border-color:var(--cherry)}
+@media (max-width:720px){
+  .l-cookies{flex-wrap:wrap;justify-content:center;border-radius:18px;padding:12px 16px}
+  .l-cookies p{white-space:normal;text-align:center}
+}
 
 /* Кнопки реагируют мгновенно — никакой инерции на наведении */
 .sh-btn,.sh-btn--secondary,.sh-btn--ghost,.sh-btn--inverse,.l-cookies__ok{transition:background 90ms linear,background-color 90ms linear,border-color 90ms linear,color 90ms linear,box-shadow 120ms linear,transform 120ms linear!important}
@@ -346,16 +290,9 @@ body{background:transparent}
 .l-vstage button:hover .l-play{background:rgba(255,255,255,.2);border-color:#FFF;transform:scale(1.04)}
 .l-vstage button:active .l-play{transform:scale(.97)}
 
-/* ── Полоса в край: тёмная плита без панели, ломает ряд кремовых карточек ── */
-.l-band{position:relative;margin:clamp(56px,7vw,104px) 0 0;padding:clamp(76px,9.5vw,140px) 0;overflow:hidden}
-.l-band::before,.l-band::after{content:"";position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(194,154,84,.5) 22%,rgba(194,154,84,.5) 78%,transparent)}
-.l-band::before{top:0}
-.l-band::after{bottom:0}
-.l-band__q{position:relative;margin:0 auto;text-align:center;color:var(--ink-900);font-family:var(--font-display);font-size:clamp(30px,4.4vw,62px);line-height:1.12;letter-spacing:-.014em;max-width:26ch;text-wrap:pretty}
-.l-band__q .l-italic{color:var(--gold-deep)}
-
-/* ── Вопросы: строки на воздухе, без панели ── */
+/* ── Вопросы: строки на воздухе, без панели; линии только между строками ── */
 .l-faq-bare{background:none !important;border:0 !important;box-shadow:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;border-top:1px solid rgba(77,14,18,.12) !important;border-radius:0 !important}
+.l-faq-bare:first-child{border-top:0 !important}
 .l-faq-bare + .l-faq-bare{margin-top:0}
 .l-faq-bare:last-of-type{border-bottom:1px solid rgba(77,14,18,.12) !important}
 .l-faq-bare::after{content:none !important}
@@ -380,11 +317,11 @@ body{background:transparent}
 
 /* ── Одинаковая реакция кнопок на всём сайте (как на air.inc):
    наведение — подъём на 1px и рост тени, нажатие — сжатие. Цвет зависит от типа. ── */
-.l-shell .sh-btn,.l-header-pill .sh-btn,.l-cookies__ok{
+.l-shell .sh-btn,.l-cookies__ok{
   transition:background-color 90ms linear,border-color 90ms linear,color 90ms linear,box-shadow 130ms linear,transform 130ms linear !important}
-.l-shell .sh-btn:hover:not(:disabled),.l-header-pill .sh-btn:hover:not(:disabled),.l-cookies__ok:hover{
+.l-shell .sh-btn:hover:not(:disabled),.l-cookies__ok:hover{
   transform:translateY(-1px) !important}
-.l-shell .sh-btn:active:not(:disabled),.l-header-pill .sh-btn:active:not(:disabled),.l-cookies__ok:active{
+.l-shell .sh-btn:active:not(:disabled),.l-cookies__ok:active{
   transform:scale(.985) !important}
 .l-shell .sh-btn:disabled{transform:none !important}
 

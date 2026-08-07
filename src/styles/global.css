@@ -54,42 +54,66 @@
 /* Кнопки-ссылки не наследуют золотое подчёркивание обычных ссылок (a:hover из base.css) */
 a.sh-btn,a.sh-btn:hover{border-bottom-color:transparent}
 
-/* ── Футер без подложки: страница плавно перетекает в бордовый ── */
-.l-footer{margin-top:clamp(90px,11vw,150px);padding:clamp(150px,17vw,240px) 0 56px;background:linear-gradient(180deg,rgba(77,14,18,0) 0%,rgba(100,49,62,.45) 26%,#64313E 58%,#4D0E12 100%)}
-.l-footer .l-display{color:var(--paper-1)}
+/* ── Футер без подложки: страница плавно перетекает в холодную небесную ноту
+   (фирменный «лёд ИИ» со светлых плит), текст остаётся тёмным ── */
+.l-footer{margin-top:clamp(90px,11vw,150px);padding:clamp(110px,13vw,180px) 0 56px;background:linear-gradient(180deg,rgba(220,234,241,0) 0%,rgba(220,234,241,.5) 38%,#CFE1EC 72%,#BFD7E5 100%)}
+.l-footer .l-display{color:var(--ink-900)}
+.l-footer .l-body{color:var(--text-secondary)}
+.l-footer .l-tag{color:var(--gold-deep)}
+.l-footer .l-footnav a,.l-footer .l-docs a{color:var(--text-secondary);border-bottom-color:rgba(77,14,18,.18)}
+.l-footer .l-footnav a:hover,.l-footer .l-docs a:hover{color:var(--cherry);border-color:var(--cherry)}
+.l-footer .l-contact__ic{border-color:rgba(77,14,18,.2);background:rgba(255,255,255,.4)}
+.l-footer .l-contact__ic img{filter:brightness(0);opacity:.75}
+.l-footer .l-contact:hover .l-contact__ic{border-color:rgba(77,14,18,.4);background:rgba(255,255,255,.65)}
+.l-footer .l-contact .l-tag{color:var(--gold-deep)}
+.l-footer .l-contact span span:last-child{color:var(--text-body)!important}
 
-/* ── Табло «Где меня слушали»: строки-перекидыши, как табло аэропорта.
+/* ── Табло «Где меня слушали»: строки на воздухе с волосяными линиями,
+   имена площадок — заголовочным шрифтом капсом, буквы перещёлкиваются.
    Все строки одного цвета и размера; справа 1–2 кадра с выступления. ── */
-.l-board{display:flex;flex-direction:column;gap:10px}
-.l-board__row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px clamp(16px,2vw,26px);border-radius:12px;background:linear-gradient(135deg,rgba(77,14,18,.94) 0%,rgba(100,49,62,.88) 100%);border:1px solid rgba(255,248,231,.14);box-shadow:inset 0 1px 0 rgba(255,248,231,.16),0 18px 40px -30px rgba(77,14,18,.6)}
-.l-board__text{font-family:var(--font-sans);font-weight:600;font-size:clamp(14px,1.7vw,21px);letter-spacing:.12em;text-transform:uppercase;color:var(--paper-1);min-width:0}
-.l-board__text span{display:inline-block;min-width:.62em;text-align:center}
+.l-board{display:flex;flex-direction:column}
+.l-board__row{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:clamp(14px,1.8vw,22px) 2px;border-top:1px solid rgba(77,14,18,.12)}
+.l-board__row:last-child{border-bottom:1px solid rgba(77,14,18,.12)}
+.l-board__text{font-family:var(--font-display);font-weight:700;font-size:clamp(20px,2.6vw,34px);line-height:1.08;letter-spacing:.045em;text-transform:uppercase;color:var(--ink-900);min-width:0}
+.l-board__text span{display:inline-block;min-width:.5em;text-align:center}
 .l-board__shots{display:flex;gap:8px;flex:0 0 auto}
-.l-board__shot{padding:0;border:1px solid rgba(255,248,231,.35);border-radius:9px;overflow:hidden;cursor:pointer;background:none;width:84px;height:56px;transition:border-color 120ms linear,transform 120ms linear}
-.l-board__shot:hover{border-color:var(--gold-light);transform:translateY(-1px)}
+.l-board__shot{padding:0;border:1px solid rgba(77,14,18,.16);border-radius:9px;overflow:hidden;cursor:pointer;background:none;width:92px;height:60px;transition:border-color 120ms linear,transform 120ms linear}
+.l-board__shot:hover{border-color:var(--gold-base);transform:translateY(-1px)}
 .l-board__shot img{width:100%;height:100%;object-fit:cover;display:block}
 @media (max-width:640px){
   .l-board__row{flex-direction:column;align-items:flex-start;gap:10px}
-  .l-board__shot{width:72px;height:48px}
+  .l-board__shot{width:76px;height:50px}
 }
 
-/* ── Телеграм-баннер: фото-фон, текст слева, телефон с видео и QR справа ── */
-.l-tgbanner{position:relative;border-radius:26px;overflow:hidden;border:1px solid rgba(255,255,255,.5)}
-.l-tgbanner__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 16%}
-.l-tgbanner__scrim{position:absolute;inset:0;background:linear-gradient(100deg,rgba(48,10,14,.92) 0%,rgba(48,10,14,.72) 44%,rgba(48,10,14,.34) 100%)}
+/* ── Телеграм-баннер: кадр yulia-wide целиком (пропорция баннера = пропорция
+   фото, ничего не режется). Композиция по третям: текст в левой трети на
+   чистой стене, Юлия в центре, телефон с QR в правой трети. ── */
+.l-tgbanner{position:relative;border-radius:26px;overflow:hidden;border:1px solid rgba(255,255,255,.5);background:#E1DDD8}
+.l-tgbanner__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0%}
+.l-tgbanner__scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,252,244,.82) 0%,rgba(255,252,244,.5) 30%,rgba(255,252,244,0) 55%)}
 .l-tgbanner__in{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,3vw,44px);padding:clamp(28px,3.4vw,56px);align-items:center}
-.l-tgbanner__media{display:flex;align-items:center;justify-content:flex-end;gap:clamp(14px,1.8vw,24px)}
+.l-tgbanner__media{display:flex;align-items:center;justify-content:flex-end}
+@media (min-width:1041px){
+  /* Баннер чуть выше кадра, фото прижато к низу: взгляд опускается к верхней
+     четверти телефона, ступни не режутся, верхняя полоска доливается цветом стены */
+  .l-tgbanner{aspect-ratio:1400/842}
+  .l-tgbanner__bg{height:auto;top:auto;bottom:0}
+  .l-tgbanner__in{height:100%;align-items:center}
+  .l-tgbanner__in > :first-child{align-self:start;padding-top:clamp(14px,1.8vw,30px)}
+}
 .l-phone{flex:0 0 auto;width:min(230px,56vw);border-radius:34px;border:9px solid #17161A;background:#17161A;box-shadow:0 34px 80px -34px rgba(0,0,0,.65);overflow:hidden}
 .l-phone video{display:block;width:100%;height:auto;border-radius:25px}
-.l-qr{flex:0 0 auto;background:#fff;border-radius:16px;padding:12px 12px 9px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 20px 48px -26px rgba(0,0,0,.55)}
+.l-qr{flex:0 0 auto;position:relative;z-index:2;margin-right:-30px;transform:translateY(56px);background:#fff;border-radius:16px;padding:12px 12px 9px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 20px 48px -26px rgba(0,0,0,.55)}
 .l-qr img{width:112px;height:112px;display:block}
 .l-qr span{font-family:var(--font-sans);font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#4b4b4b}
 @media (max-width:1040px){
   .l-tgbanner__in{grid-template-columns:minmax(0,1fr)}
+  .l-tgbanner__scrim{background:rgba(255,252,244,.8)}
   .l-tgbanner__media{justify-content:center}
 }
 @media (max-width:480px){
   .l-tgbanner__media{flex-direction:column-reverse}
+  .l-qr{margin-right:0;transform:none}
 }
 
 /* Сетка «Что ученики уже делают с ИИ»: строго 3×3, карточки меньше обычных */
