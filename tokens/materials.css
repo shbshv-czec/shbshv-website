@@ -1,0 +1,48 @@
+/* Materials — the expressive layer. Refraction is the one ornament this system owns:
+   white light enters a facet and leaves as a spectrum. Use ONE refracted element per
+   view; everything else stays paper, ink, sand and gold. */
+:root{
+  /* Spectrum: refracted through cream, never neon. Order = physical dispersion. */
+  --spectrum-1:#E7A6AE;
+  --spectrum-2:#E9C58E;
+  --spectrum-3:#EFE3A9;
+  --spectrum-4:#BFD8C0;
+  --spectrum-5:#C1DBE8;
+  --spectrum-6:#C6BEDF;
+
+  --gradient-spectrum:linear-gradient(90deg,var(--spectrum-1) 0%,var(--spectrum-2) 22%,var(--spectrum-3) 40%,var(--spectrum-4) 60%,var(--spectrum-5) 80%,var(--spectrum-6) 100%); /* @kind color */
+  --gradient-spectrum-soft:linear-gradient(90deg,rgba(231,166,174,.55) 0%,rgba(233,197,142,.55) 25%,rgba(191,216,192,.5) 55%,rgba(193,219,232,.55) 78%,rgba(198,190,223,.5) 100%); /* @kind color */
+  --gradient-spectrum-vertical:linear-gradient(180deg,var(--spectrum-1) 0%,var(--spectrum-2) 30%,var(--spectrum-4) 65%,var(--spectrum-6) 100%); /* @kind color */
+
+  /* Caustic: the pool of dispersed light a facet throws onto paper */
+  --gradient-caustic:radial-gradient(120% 90% at 18% 12%,rgba(231,166,174,.42) 0%,rgba(231,166,174,0) 55%),
+                    radial-gradient(110% 80% at 82% 22%,rgba(193,219,232,.40) 0%,rgba(193,219,232,0) 58%),
+                    radial-gradient(120% 110% at 50% 96%,rgba(233,197,142,.34) 0%,rgba(233,197,142,0) 60%); /* @kind color */
+
+  /* Metal: the crystal edge line */
+  --gradient-gold:linear-gradient(90deg,rgba(194,154,84,0) 0%,var(--gold-light) 18%,var(--gold-base) 50%,var(--gold-deep) 82%,rgba(154,116,52,0) 100%); /* @kind color */
+  --gradient-gold-solid:linear-gradient(135deg,var(--gold-light) 0%,var(--gold-base) 48%,var(--gold-deep) 100%); /* @kind color */
+
+  /* Paper: warm wash, no visible texture image */
+  --gradient-paper:linear-gradient(180deg,var(--paper-0) 0%,var(--paper-1) 42%,var(--paper-2) 100%); /* @kind color */
+  --gradient-sand:linear-gradient(180deg,var(--paper-3) 0%,var(--paper-5) 100%); /* @kind color */
+  --gradient-ink:linear-gradient(160deg,var(--ink-800) 0%,var(--ink-900) 70%); /* @kind color */
+
+  /* Protection scrims for type over imagery */
+  --scrim-bottom:linear-gradient(180deg,rgba(77,14,18,0) 0%,rgba(77,14,18,.55) 100%); /* @kind color */
+  --scrim-paper-bottom:linear-gradient(180deg,rgba(255,248,231,0) 0%,rgba(255,248,231,.92) 78%,var(--paper-1) 100%); /* @kind color */
+  --scrim-left:linear-gradient(90deg,rgba(77,14,18,.5) 0%,rgba(77,14,18,0) 62%); /* @kind color */
+
+  /* Glass */
+  --glass-fill:rgba(255,252,244,.62); /* @kind color */
+  --glass-fill-strong:rgba(255,252,244,.84); /* @kind color */
+  --glass-fill-cold:rgba(193,219,232,.28); /* @kind color */
+  --glass-border:rgba(255,255,255,.55);
+  --glass-blur:18px; /* @kind other */
+  --glass-blur-strong:32px; /* @kind other */
+  --backdrop-glass:saturate(1.15) blur(var(--glass-blur)); /* @kind other */
+  --backdrop-veil:blur(2px); /* @kind other */
+
+  /* Overlay behind modals */
+  --overlay-ink:rgba(77,14,18,.34); /* @kind color */
+}

@@ -1,0 +1,31 @@
+/* Base element defaults. Consumers get sane paper + ink without writing anything. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface-page);color:var(--text-body);font-family:var(--font-sans);font-size:var(--fs-body);line-height:var(--lh-body);font-weight:var(--fw-regular);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;text-wrap:pretty}
+h1,h2,h3,h4,h5,h6{margin:0;color:var(--text-strong);font-weight:var(--fw-medium);text-wrap:balance}
+h1{font-size:var(--fs-h1);line-height:var(--lh-h1);letter-spacing:var(--ls-h1)}
+h2{font-size:var(--fs-h2);line-height:var(--lh-h2);letter-spacing:var(--ls-h2)}
+h3{font-size:var(--fs-h3);line-height:var(--lh-h3);letter-spacing:var(--ls-h3)}
+h4{font-size:var(--fs-h4);line-height:var(--lh-h4);letter-spacing:var(--ls-h4)}
+p{margin:0 0 1em}
+p:last-child{margin-bottom:0}
+a{color:var(--text-link);text-decoration:none;border-bottom:1px solid var(--border-gold);transition:color var(--dur-fast) var(--ease-standard),border-color var(--dur-fast) var(--ease-standard)}
+a:hover{color:var(--text-link-hover);border-bottom-color:var(--gold-base)}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:none;box-shadow:var(--shadow-focus);border-radius:var(--radius-xs)}
+strong{font-weight:var(--fw-semibold);color:var(--text-strong)}
+em{font-style:italic}
+small{font-size:var(--fs-caption)}
+code,kbd,samp{font-family:var(--font-mono);font-size:.92em}
+hr{height:1px;border:0;background:var(--border-soft);margin:var(--space-9) 0}
+img,svg,video{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+::selection{background:rgba(200,164,159,.4);color:var(--ink-900)}
+
+/* Utility roles used across cards and kits */
+.ds-display{font-family:var(--font-display);font-weight:var(--fw-display)}
+.ds-accent{font-family:var(--font-display);font-weight:var(--fw-accent);font-style:italic}
+.ds-eyebrow{font-family:var(--font-sans);font-size:var(--fs-label);letter-spacing:var(--ls-label);line-height:var(--lh-label);text-transform:uppercase;color:var(--text-muted);font-weight:var(--fw-medium)}
+.ds-mono{font-family:var(--font-mono);font-size:var(--fs-mono);letter-spacing:var(--ls-mono);color:var(--text-secondary)}
+.ds-measure{max-width:var(--text-measure)}
+.ds-spectrum-rule{height:1px;background:var(--gradient-spectrum);border:0}
+.ds-gold-rule{height:1px;background:var(--gradient-gold);border:0}

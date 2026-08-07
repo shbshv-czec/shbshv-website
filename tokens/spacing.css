@@ -1,0 +1,40 @@
+/* Spacing — 4px base, widening to generous editorial air at the top of the scale.
+   Silence is a material here: prefer the next step up. */
+:root{
+  --space-0:0;
+  --space-px:1px;
+  --space-1:2px;
+  --space-2:4px;
+  --space-3:8px;
+  --space-4:12px;
+  --space-5:16px;
+  --space-6:20px;
+  --space-7:24px;
+  --space-8:32px;
+  --space-9:40px;
+  --space-10:56px;
+  --space-11:80px;
+  --space-12:112px;
+  --space-13:160px;
+  --space-14:224px;
+
+  /* Named rhythms */
+  --gutter:24px;
+  --gutter-lg:40px;
+  --page-pad:32px;
+  --page-pad-lg:80px;
+  --section-gap:112px;
+  --card-pad:28px;
+  --card-pad-lg:40px;
+  --control-pad-x:20px;
+  --control-gap:10px;
+
+  /* Layout */
+  --container-max:1240px;
+  --container-narrow:760px;
+  --container-wide:1480px;
+  --control-h-sm:34px;
+  --control-h-md:44px;
+  --control-h-lg:54px;
+  --hairline:1px;
+}

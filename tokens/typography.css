@@ -1,0 +1,70 @@
+/* Typography. Two voices: a high-contrast garamond for meaning (display, quotes,
+   numerals) and a quiet geometric sans for everything operational. Mono is for
+   technical/metadata labels only. */
+:root{
+  --font-display:"Cormorant",Georgia,"Times New Roman",serif;
+  --font-sans:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+
+  --fw-light:300; /* @kind font */
+  /* Cormorant Bold — all display type */
+  --fw-display:700; /* @kind font */
+  /* Cormorant Italic — the one accented word or phrase */
+  --fw-accent:400; /* @kind font */
+  --fw-regular:400; /* @kind font */
+  --fw-medium:500; /* @kind font */
+  --fw-semibold:600; /* @kind font */
+  --fw-bold:700; /* @kind font */
+
+  /* Display (serif) */
+  --fs-display-1:96px; /* @kind font */
+  --lh-display-1:0.96; /* @kind font */
+  --ls-display-1:-0.025em; /* @kind font */
+  --fs-display-2:68px; /* @kind font */
+  --lh-display-2:1.02; /* @kind font */
+  --ls-display-2:-0.02em; /* @kind font */
+  --fs-display-3:48px; /* @kind font */
+  --lh-display-3:1.08; /* @kind font */
+  --ls-display-3:-0.015em; /* @kind font */
+  --fs-quote:34px; /* @kind font */
+  --lh-quote:1.32; /* @kind font */
+  --ls-quote:-0.01em; /* @kind font */
+
+  /* Headings (sans) */
+  --fs-h1:40px; /* @kind font */
+  --lh-h1:1.14; /* @kind font */
+  --ls-h1:-0.02em; /* @kind font */
+  --fs-h2:30px; /* @kind font */
+  --lh-h2:1.2; /* @kind font */
+  --ls-h2:-0.016em; /* @kind font */
+  --fs-h3:22px; /* @kind font */
+  --lh-h3:1.28; /* @kind font */
+  --ls-h3:-0.012em; /* @kind font */
+  --fs-h4:18px; /* @kind font */
+  --lh-h4:1.36; /* @kind font */
+  --ls-h4:-0.008em; /* @kind font */
+
+  /* Body */
+  --fs-body-lg:19px; /* @kind font */
+  --lh-body-lg:1.66; /* @kind font */
+  --fs-body:17px; /* @kind font */
+  --lh-body:1.7; /* @kind font */
+  --fs-body-sm:15px; /* @kind font */
+  --lh-body-sm:1.6; /* @kind font */
+  --fs-caption:13px; /* @kind font */
+  --lh-caption:1.5; /* @kind font */
+
+  /* Labels / eyebrows */
+  --fs-label:12px; /* @kind font */
+  --ls-label:0.14em; /* @kind font */
+  --lh-label:1.2; /* @kind font */
+  --fs-label-lg:13px; /* @kind font */
+  --ls-label-lg:0.1em; /* @kind font */
+  --fs-mono:13px; /* @kind font */
+  --ls-mono:0.02em; /* @kind font */
+  --lh-mono:1.5; /* @kind font */
+
+  /* Named roles */
+  --text-measure:66ch; /* @kind other */
+  --text-measure-narrow:44ch; /* @kind other */
+}

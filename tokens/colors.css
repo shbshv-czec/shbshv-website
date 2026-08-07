@@ -1,0 +1,98 @@
+/* SHBSHV AI — colour system.
+   Base ramp is taken verbatim from the brand palette (assets/source/palette-source.png).
+   Everything else is derived in oklch space from those eight anchors. */
+:root{
+  /* ── Brand anchors (verbatim) ───────────────────────────── */
+  --cream-toast:#FFF8E7;   /* Тостовый крем — фон, бумага */
+  --cream:#EEE4DA;         /* Крем — светлый беж, карточки */
+  --sand:#D8C4AC;          /* Песочный — темный беж, подложки */
+  --rose-dust:#C8A49F;     /* Пыльный розовый — основной тон */
+  --sky:#C1DBE8;           /* Небесный — холодная нота: лед, ИИ */
+  --wine:#64313E;          /* Благородный винный — акцент, кнопки */
+  --cherry:#4D0E12;        /* Глубокий вишневый — якорь: текст, логотип */
+  --gold:#C29A54;          /* Золото — металл, линия кристалла */
+
+  /* ── Warm paper ramp (derived) ──────────────────────────── */
+  --paper-0:#FFFCF4;
+  --paper-1:#FFF8E7;
+  --paper-2:#F7EEDE;
+  --paper-3:#EEE4DA;
+  --paper-4:#E3D5C6;
+  --paper-5:#D8C4AC;
+  --paper-6:#C3AB92;
+
+  /* ── Ink ramp (derived from cherry / wine) ──────────────── */
+  --ink-900:#4D0E12;
+  --ink-800:#5A2029;
+  --ink-700:#64313E;
+  --ink-600:#7A4B53;
+  --ink-500:#8F676C;
+  --ink-400:#A98A87;
+  --ink-300:#C8A49F;
+  --ink-200:#DEC5BF;
+  --ink-100:#EFE0DC;
+
+  /* ── Gold ramp ──────────────────────────────────────────── */
+  --gold-light:#E6C88E;
+  --gold-base:#C29A54;
+  --gold-deep:#9A7434;
+
+  /* ── Cold note (AI / ice) ───────────────────────────────── */
+  --sky-light:#DCEAF1;
+  --sky-base:#C1DBE8;
+  --sky-deep:#8FB6C8;
+
+  /* ── Semantic surfaces ─────────────────────────────────── */
+  --surface-page:var(--paper-1);
+  --surface-page-alt:var(--paper-2);
+  --surface-card:var(--paper-0);
+  --surface-card-quiet:var(--paper-3);
+  --surface-sunken:var(--paper-4);
+  --surface-underlay:var(--paper-5);
+  --surface-inverse:var(--ink-900);
+  --surface-inverse-soft:var(--ink-800);
+  --surface-cold:var(--sky-light);
+
+  /* ── Semantic text ─────────────────────────────────────── */
+  --text-strong:var(--ink-900);
+  --text-body:var(--ink-800);
+  --text-secondary:var(--ink-600);
+  --text-muted:var(--ink-500);
+  --text-faint:var(--ink-400);
+  --text-inverse:var(--paper-1);
+  --text-inverse-muted:#D8BDB8;
+  --text-on-accent:var(--paper-1);
+  --text-gold:var(--gold-deep);
+  --text-link:var(--ink-700);
+  --text-link-hover:var(--ink-900);
+
+  /* ── Semantic borders ──────────────────────────────────── */
+  --border-hairline:rgba(77,14,18,.08);
+  --border-soft:rgba(77,14,18,.12);
+  --border-strong:rgba(77,14,18,.22);
+  --border-inverse:rgba(255,248,231,.16);
+  --border-gold:rgba(194,154,84,.45);
+  --border-cold:rgba(143,182,200,.5);
+
+  /* ── Accent (buttons, active states) ───────────────────── */
+  --accent:var(--wine);
+  --accent-hover:#552934;
+  --accent-press:var(--cherry);
+  --accent-quiet:rgba(100,49,62,.08);
+  --accent-quiet-hover:rgba(100,49,62,.14);
+  --accent-contrast:var(--paper-1);
+
+  /* ── Focus ─────────────────────────────────────────────── */
+  --focus-ring:rgba(194,154,84,.55);
+  --focus-ring-inverse:rgba(230,200,142,.7);
+
+  /* ── State colours (derived — not in the source palette) ─ */
+  --state-info:var(--sky-deep);
+  --state-info-surface:var(--sky-light);
+  --state-positive:#6F8F76;
+  --state-positive-surface:#DDE7DD;
+  --state-warning:var(--gold-deep);
+  --state-warning-surface:#F4E6CB;
+  --state-critical:var(--cherry);
+  --state-critical-surface:#F0DCDC;
+}
