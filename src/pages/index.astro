@@ -327,15 +327,13 @@ const RAIL = [['top', 'Начало'], ['audience', 'Для кого'], ['about'
 
   <Reviews />
 
-  <!-- Бесплатно: запись выступления -->
+  <!-- Бесплатно: запись выступления (вебинар) -->
   <section id="lead" class="l-section">
     <div class="l-shell">
-      <div class="l-split" style="align-items:stretch">
-        <div class="l-glass l-glass--sheen l-rise" style="padding:clamp(30px,3.4vw,52px);display:flex;flex-direction:column;gap:22px">
-          <div style="display:flex;align-items:center;gap:14px">
-            <Icon name="ray" size={26} strokeWidth={0.9} />
-            <span class="l-tag">Бесплатно</span>
-          </div>
+      <div class="l-glass l-glass--sheen l-rise" style="padding:clamp(30px,3.4vw,52px)">
+        <div class="l-split" style="align-items:center">
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <span class="l-tag">Бесплатно</span>
           <h2 class="l-display" style="font-size:clamp(26px,3.2vw,44px);max-width:20ch">
             Посмотрите, как это выглядит вживую
           </h2>
@@ -343,7 +341,6 @@ const RAIL = [['top', 'Начало'], ['audience', 'Для кого'], ['about'
             Запись моего выступления для руководителей в Менеджер-клубе. За час — про то, что ИИ реально меняет в работе руководителя, без магии и без обещаний. Оставьте почту, и я пришлю запись.
           </p>
           <div id="lead-sent" hidden style="display:flex;gap:14px;align-items:center;padding:20px 22px;background:rgba(255,252,244,.6);border-radius:18px;border:1px solid rgba(255,255,255,.6)">
-            <Icon name="checkRing" size={24} strokeWidth={0.9} />
             <span class="l-body">Запись отправлена на почту. Проверьте входящие.</span>
           </div>
           <div id="lead-form" style="display:flex;flex-direction:column;gap:18px">
@@ -375,19 +372,29 @@ const RAIL = [['top', 'Начало'], ['audience', 'Для кого'], ['about'
           </div>
         </div>
 
-        <div class="l-rise" data-d="2" style="position:relative;border-radius:26px;overflow:hidden;min-height:380px;border:1px solid rgba(255,255,255,.5)">
-          <img src="assets/people/yulia-tg.jpg" alt="Юлия Шабашова" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:48% 16%" />
-          <span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(77,14,18,0) 0%,rgba(77,14,18,.14) 34%,rgba(77,14,18,.74) 68%,rgba(58,10,14,.93) 100%)"></span>
-          <div style="position:absolute;inset:0;padding:clamp(28px,3.2vw,44px);display:flex;flex-direction:column;justify-content:flex-end;gap:18px">
-            <span class="l-tag" style="color:var(--gold-light)">Телеграм-канал</span>
-            <span class="l-display" style="font-size:clamp(26px,3vw,42px);color:var(--paper-1)">ИИ на спокойном</span>
-            <p style="margin:0;font-family:var(--font-sans);font-size:15.5px;line-height:1.6;color:var(--text-inverse-muted);max-width:38ch">
-              Как использовать ИИ в работе и жизни. Без гонки за новинками и без обещаний, что нейросеть сделает всё за вас.
-            </p>
-            <button type="button" class="sh-btn sh-btn--inverse" style="align-self:flex-start;border-radius:999px">
-              Подписаться <Icon name="arrowUp" size={15} tone="current" />
-            </button>
-          </div>
+        <div class="l-rise" data-d="2" style="position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.6);box-shadow:0 24px 60px -36px rgba(77,14,18,.5)">
+          <img src="assets/imagery/webinar.webp" alt="Кадр вебинара: Юлия ведёт онлайн-встречу" loading="lazy" style="display:block;width:100%;height:auto" />
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Телеграм-канал: правки будут позже, пока просто на всю ширину -->
+  <section id="tg" class="l-section">
+    <div class="l-shell">
+      <div class="l-rise" style="position:relative;border-radius:26px;overflow:hidden;min-height:clamp(360px,42vw,480px);border:1px solid rgba(255,255,255,.5)">
+        <img src="assets/people/yulia-tg.jpg" alt="Юлия Шабашова" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:48% 16%" />
+        <span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(77,14,18,0) 0%,rgba(77,14,18,.14) 34%,rgba(77,14,18,.74) 68%,rgba(58,10,14,.93) 100%)"></span>
+        <div style="position:absolute;inset:0;padding:clamp(28px,3.2vw,44px);display:flex;flex-direction:column;justify-content:flex-end;gap:18px">
+          <span class="l-tag" style="color:var(--gold-light)">Телеграм-канал</span>
+          <span class="l-display" style="font-size:clamp(26px,3vw,42px);color:var(--paper-1)">ИИ на спокойном</span>
+          <p style="margin:0;font-family:var(--font-sans);font-size:15.5px;line-height:1.6;color:var(--text-inverse-muted);max-width:38ch">
+            Как использовать ИИ в работе и жизни. Без гонки за новинками и без обещаний, что нейросеть сделает всё за вас.
+          </p>
+          <button type="button" class="sh-btn sh-btn--inverse" style="align-self:flex-start;border-radius:999px">
+            Подписаться <Icon name="arrowUp" size={15} tone="current" />
+          </button>
         </div>
       </div>
     </div>
